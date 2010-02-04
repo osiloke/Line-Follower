@@ -1,0 +1,479 @@
+   1               		.file	"a2d.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	a2dInit
+  19               	a2dInit:
+  20               	.LFB2:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23 0000 CF93      		push r28
+  24 0002 DF93      		push r29
+  25 0004 CDB7      		in r28,__SP_L__
+  26 0006 DEB7      		in r29,__SP_H__
+  27               	/* prologue end (size=4) */
+  28               	.LM2:
+  29 0008 AAE7      		ldi r26,lo8(122)
+  30 000a B0E0      		ldi r27,hi8(122)
+  31 000c EAE7      		ldi r30,lo8(122)
+  32 000e F0E0      		ldi r31,hi8(122)
+  33 0010 8081      		ld r24,Z
+  34 0012 8068      		ori r24,lo8(-128)
+  35 0014 8C93      		st X,r24
+  36               	.LM3:
+  37 0016 AAE7      		ldi r26,lo8(122)
+  38 0018 B0E0      		ldi r27,hi8(122)
+  39 001a EAE7      		ldi r30,lo8(122)
+  40 001c F0E0      		ldi r31,hi8(122)
+  41 001e 8081      		ld r24,Z
+  42 0020 8F7D      		andi r24,lo8(-33)
+  43 0022 8C93      		st X,r24
+  44               	.LM4:
+  45 0024 86E0      		ldi r24,lo8(6)
+  46 0026 0E94 0000 		call a2dSetPrescaler
+  47               	.LM5:
+  48 002a 81E0      		ldi r24,lo8(1)
+  49 002c 0E94 0000 		call a2dSetReference
+  50               	.LM6:
+  51 0030 ACE7      		ldi r26,lo8(124)
+  52 0032 B0E0      		ldi r27,hi8(124)
+  53 0034 ECE7      		ldi r30,lo8(124)
+  54 0036 F0E0      		ldi r31,hi8(124)
+  55 0038 8081      		ld r24,Z
+  56 003a 8F7D      		andi r24,lo8(-33)
+  57 003c 8C93      		st X,r24
+  58               	.LM7:
+  59 003e AAE7      		ldi r26,lo8(122)
+  60 0040 B0E0      		ldi r27,hi8(122)
+  61 0042 EAE7      		ldi r30,lo8(122)
+  62 0044 F0E0      		ldi r31,hi8(122)
+  63 0046 8081      		ld r24,Z
+  64 0048 8860      		ori r24,lo8(8)
+  65 004a 8C93      		st X,r24
+  66               	.LM8:
+  67 004c 1092 0000 		sts a2dCompleteFlag,__zero_reg__
+  68               	.LM9:
+  69               	/* #APP */
+  70 0050 7894      		sei
+  71               	/* #NOAPP */
+  72               	/* epilogue: frame size=0 */
+  73 0052 DF91      		pop r29
+  74 0054 CF91      		pop r28
+  75 0056 0895      		ret
+  76               	/* epilogue end (size=3) */
+  77               	/* function a2dInit size 45 (38) */
+  78               	.LFE2:
+  80               	.global	a2dOff
+  82               	a2dOff:
+  83               	.LFB3:
+  84               	.LM10:
+  85               	/* prologue: frame size=0 */
+  86 0058 CF93      		push r28
+  87 005a DF93      		push r29
+  88 005c CDB7      		in r28,__SP_L__
+  89 005e DEB7      		in r29,__SP_H__
+  90               	/* prologue end (size=4) */
+  91               	.LM11:
+  92 0060 AAE7      		ldi r26,lo8(122)
+  93 0062 B0E0      		ldi r27,hi8(122)
+  94 0064 EAE7      		ldi r30,lo8(122)
+  95 0066 F0E0      		ldi r31,hi8(122)
+  96 0068 8081      		ld r24,Z
+  97 006a 877F      		andi r24,lo8(-9)
+  98 006c 8C93      		st X,r24
+  99               	.LM12:
+ 100 006e AAE7      		ldi r26,lo8(122)
+ 101 0070 B0E0      		ldi r27,hi8(122)
+ 102 0072 EAE7      		ldi r30,lo8(122)
+ 103 0074 F0E0      		ldi r31,hi8(122)
+ 104 0076 9081      		ld r25,Z
+ 105 0078 8FE7      		ldi r24,lo8(127)
+ 106 007a 8923      		and r24,r25
+ 107 007c 8C93      		st X,r24
+ 108               	/* epilogue: frame size=0 */
+ 109 007e DF91      		pop r29
+ 110 0080 CF91      		pop r28
+ 111 0082 0895      		ret
+ 112               	/* epilogue end (size=3) */
+ 113               	/* function a2dOff size 22 (15) */
+ 114               	.LFE3:
+ 116               	.global	a2dSetPrescaler
+ 118               	a2dSetPrescaler:
+ 119               	.LFB4:
+ 120               	.LM13:
+ 121               	/* prologue: frame size=1 */
+ 122 0084 CF93      		push r28
+ 123 0086 DF93      		push r29
+ 124 0088 CDB7      		in r28,__SP_L__
+ 125 008a DEB7      		in r29,__SP_H__
+ 126 008c 2197      		sbiw r28,1
+ 127 008e 0FB6      		in __tmp_reg__,__SREG__
+ 128 0090 F894      		cli
+ 129 0092 DEBF      		out __SP_H__,r29
+ 130 0094 0FBE      		out __SREG__,__tmp_reg__
+ 131 0096 CDBF      		out __SP_L__,r28
+ 132               	/* prologue end (size=10) */
+ 133 0098 8983      		std Y+1,r24
+ 134               	.LM14:
+ 135 009a AAE7      		ldi r26,lo8(122)
+ 136 009c B0E0      		ldi r27,hi8(122)
+ 137 009e EAE7      		ldi r30,lo8(122)
+ 138 00a0 F0E0      		ldi r31,hi8(122)
+ 139 00a2 8081      		ld r24,Z
+ 140 00a4 982F      		mov r25,r24
+ 141 00a6 987F      		andi r25,lo8(-8)
+ 142 00a8 8981      		ldd r24,Y+1
+ 143 00aa 892B      		or r24,r25
+ 144 00ac 8C93      		st X,r24
+ 145               	/* epilogue: frame size=1 */
+ 146 00ae 2196      		adiw r28,1
+ 147 00b0 0FB6      		in __tmp_reg__,__SREG__
+ 148 00b2 F894      		cli
+ 149 00b4 DEBF      		out __SP_H__,r29
+ 150 00b6 0FBE      		out __SREG__,__tmp_reg__
+ 151 00b8 CDBF      		out __SP_L__,r28
+ 152 00ba DF91      		pop r29
+ 153 00bc CF91      		pop r28
+ 154 00be 0895      		ret
+ 155               	/* epilogue end (size=9) */
+ 156               	/* function a2dSetPrescaler size 30 (11) */
+ 157               	.LFE4:
+ 159               	.global	a2dSetReference
+ 161               	a2dSetReference:
+ 162               	.LFB5:
+ 163               	.LM15:
+ 164               	/* prologue: frame size=1 */
+ 165 00c0 CF93      		push r28
+ 166 00c2 DF93      		push r29
+ 167 00c4 CDB7      		in r28,__SP_L__
+ 168 00c6 DEB7      		in r29,__SP_H__
+ 169 00c8 2197      		sbiw r28,1
+ 170 00ca 0FB6      		in __tmp_reg__,__SREG__
+ 171 00cc F894      		cli
+ 172 00ce DEBF      		out __SP_H__,r29
+ 173 00d0 0FBE      		out __SREG__,__tmp_reg__
+ 174 00d2 CDBF      		out __SP_L__,r28
+ 175               	/* prologue end (size=10) */
+ 176 00d4 8983      		std Y+1,r24
+ 177               	.LM16:
+ 178 00d6 ACE7      		ldi r26,lo8(124)
+ 179 00d8 B0E0      		ldi r27,hi8(124)
+ 180 00da ECE7      		ldi r30,lo8(124)
+ 181 00dc F0E0      		ldi r31,hi8(124)
+ 182 00de 8081      		ld r24,Z
+ 183 00e0 982F      		mov r25,r24
+ 184 00e2 8FE3      		ldi r24,lo8(63)
+ 185 00e4 292F      		mov r18,r25
+ 186 00e6 2823      		and r18,r24
+ 187 00e8 8981      		ldd r24,Y+1
+ 188 00ea 882F      		mov r24,r24
+ 189 00ec 90E0      		ldi r25,lo8(0)
+ 190 00ee 0024      		clr __tmp_reg__
+ 191 00f0 9695      		lsr r25
+ 192 00f2 8795      		ror r24
+ 193 00f4 0794      		ror __tmp_reg__
+ 194 00f6 9695      		lsr r25
+ 195 00f8 8795      		ror r24
+ 196 00fa 0794      		ror __tmp_reg__
+ 197 00fc 982F      		mov r25,r24
+ 198 00fe 802D      		mov r24,__tmp_reg__
+ 199 0100 822B      		or r24,r18
+ 200 0102 8C93      		st X,r24
+ 201               	/* epilogue: frame size=1 */
+ 202 0104 2196      		adiw r28,1
+ 203 0106 0FB6      		in __tmp_reg__,__SREG__
+ 204 0108 F894      		cli
+ 205 010a DEBF      		out __SP_H__,r29
+ 206 010c 0FBE      		out __SREG__,__tmp_reg__
+ 207 010e CDBF      		out __SP_L__,r28
+ 208 0110 DF91      		pop r29
+ 209 0112 CF91      		pop r28
+ 210 0114 0895      		ret
+ 211               	/* epilogue end (size=9) */
+ 212               	/* function a2dSetReference size 43 (24) */
+ 213               	.LFE5:
+ 215               	.global	a2dSetChannel
+ 217               	a2dSetChannel:
+ 218               	.LFB6:
+ 219               	.LM17:
+ 220               	/* prologue: frame size=1 */
+ 221 0116 CF93      		push r28
+ 222 0118 DF93      		push r29
+ 223 011a CDB7      		in r28,__SP_L__
+ 224 011c DEB7      		in r29,__SP_H__
+ 225 011e 2197      		sbiw r28,1
+ 226 0120 0FB6      		in __tmp_reg__,__SREG__
+ 227 0122 F894      		cli
+ 228 0124 DEBF      		out __SP_H__,r29
+ 229 0126 0FBE      		out __SREG__,__tmp_reg__
+ 230 0128 CDBF      		out __SP_L__,r28
+ 231               	/* prologue end (size=10) */
+ 232 012a 8983      		std Y+1,r24
+ 233               	.LM18:
+ 234 012c ACE7      		ldi r26,lo8(124)
+ 235 012e B0E0      		ldi r27,hi8(124)
+ 236 0130 ECE7      		ldi r30,lo8(124)
+ 237 0132 F0E0      		ldi r31,hi8(124)
+ 238 0134 8081      		ld r24,Z
+ 239 0136 982F      		mov r25,r24
+ 240 0138 907E      		andi r25,lo8(-32)
+ 241 013a 8981      		ldd r24,Y+1
+ 242 013c 8F71      		andi r24,lo8(31)
+ 243 013e 892B      		or r24,r25
+ 244 0140 8C93      		st X,r24
+ 245               	/* epilogue: frame size=1 */
+ 246 0142 2196      		adiw r28,1
+ 247 0144 0FB6      		in __tmp_reg__,__SREG__
+ 248 0146 F894      		cli
+ 249 0148 DEBF      		out __SP_H__,r29
+ 250 014a 0FBE      		out __SREG__,__tmp_reg__
+ 251 014c CDBF      		out __SP_L__,r28
+ 252 014e DF91      		pop r29
+ 253 0150 CF91      		pop r28
+ 254 0152 0895      		ret
+ 255               	/* epilogue end (size=9) */
+ 256               	/* function a2dSetChannel size 31 (12) */
+ 257               	.LFE6:
+ 259               	.global	a2dStartConvert
+ 261               	a2dStartConvert:
+ 262               	.LFB7:
+ 263               	.LM19:
+ 264               	/* prologue: frame size=0 */
+ 265 0154 CF93      		push r28
+ 266 0156 DF93      		push r29
+ 267 0158 CDB7      		in r28,__SP_L__
+ 268 015a DEB7      		in r29,__SP_H__
+ 269               	/* prologue end (size=4) */
+ 270               	.LM20:
+ 271 015c AAE7      		ldi r26,lo8(122)
+ 272 015e B0E0      		ldi r27,hi8(122)
+ 273 0160 EAE7      		ldi r30,lo8(122)
+ 274 0162 F0E0      		ldi r31,hi8(122)
+ 275 0164 8081      		ld r24,Z
+ 276 0166 8061      		ori r24,lo8(16)
+ 277 0168 8C93      		st X,r24
+ 278               	.LM21:
+ 279 016a AAE7      		ldi r26,lo8(122)
+ 280 016c B0E0      		ldi r27,hi8(122)
+ 281 016e EAE7      		ldi r30,lo8(122)
+ 282 0170 F0E0      		ldi r31,hi8(122)
+ 283 0172 8081      		ld r24,Z
+ 284 0174 8064      		ori r24,lo8(64)
+ 285 0176 8C93      		st X,r24
+ 286               	/* epilogue: frame size=0 */
+ 287 0178 DF91      		pop r29
+ 288 017a CF91      		pop r28
+ 289 017c 0895      		ret
+ 290               	/* epilogue end (size=3) */
+ 291               	/* function a2dStartConvert size 21 (14) */
+ 292               	.LFE7:
+ 294               	.global	a2dIsComplete
+ 296               	a2dIsComplete:
+ 297               	.LFB8:
+ 298               	.LM22:
+ 299               	/* prologue: frame size=0 */
+ 300 017e CF93      		push r28
+ 301 0180 DF93      		push r29
+ 302 0182 CDB7      		in r28,__SP_L__
+ 303 0184 DEB7      		in r29,__SP_H__
+ 304               	/* prologue end (size=4) */
+ 305               	.LM23:
+ 306 0186 EAE7      		ldi r30,lo8(122)
+ 307 0188 F0E0      		ldi r31,hi8(122)
+ 308 018a 8081      		ld r24,Z
+ 309 018c 882F      		mov r24,r24
+ 310 018e 90E0      		ldi r25,lo8(0)
+ 311 0190 8074      		andi r24,lo8(64)
+ 312 0192 9070      		andi r25,hi8(64)
+ 313               	/* epilogue: frame size=0 */
+ 314 0194 DF91      		pop r29
+ 315 0196 CF91      		pop r28
+ 316 0198 0895      		ret
+ 317               	/* epilogue end (size=3) */
+ 318               	/* function a2dIsComplete size 14 (7) */
+ 319               	.LFE8:
+ 321               	.global	a2dConvert10bit
+ 323               	a2dConvert10bit:
+ 324               	.LFB9:
+ 325               	.LM24:
+ 326               	/* prologue: frame size=1 */
+ 327 019a CF93      		push r28
+ 328 019c DF93      		push r29
+ 329 019e CDB7      		in r28,__SP_L__
+ 330 01a0 DEB7      		in r29,__SP_H__
+ 331 01a2 2197      		sbiw r28,1
+ 332 01a4 0FB6      		in __tmp_reg__,__SREG__
+ 333 01a6 F894      		cli
+ 334 01a8 DEBF      		out __SP_H__,r29
+ 335 01aa 0FBE      		out __SREG__,__tmp_reg__
+ 336 01ac CDBF      		out __SP_L__,r28
+ 337               	/* prologue end (size=10) */
+ 338 01ae 8983      		std Y+1,r24
+ 339               	.LM25:
+ 340 01b0 1092 0000 		sts a2dCompleteFlag,__zero_reg__
+ 341               	.LM26:
+ 342 01b4 ACE7      		ldi r26,lo8(124)
+ 343 01b6 B0E0      		ldi r27,hi8(124)
+ 344 01b8 ECE7      		ldi r30,lo8(124)
+ 345 01ba F0E0      		ldi r31,hi8(124)
+ 346 01bc 8081      		ld r24,Z
+ 347 01be 982F      		mov r25,r24
+ 348 01c0 907E      		andi r25,lo8(-32)
+ 349 01c2 8981      		ldd r24,Y+1
+ 350 01c4 8F71      		andi r24,lo8(31)
+ 351 01c6 892B      		or r24,r25
+ 352 01c8 8C93      		st X,r24
+ 353               	.LM27:
+ 354 01ca AAE7      		ldi r26,lo8(122)
+ 355 01cc B0E0      		ldi r27,hi8(122)
+ 356 01ce EAE7      		ldi r30,lo8(122)
+ 357 01d0 F0E0      		ldi r31,hi8(122)
+ 358 01d2 8081      		ld r24,Z
+ 359 01d4 8061      		ori r24,lo8(16)
+ 360 01d6 8C93      		st X,r24
+ 361               	.LM28:
+ 362 01d8 AAE7      		ldi r26,lo8(122)
+ 363 01da B0E0      		ldi r27,hi8(122)
+ 364 01dc EAE7      		ldi r30,lo8(122)
+ 365 01de F0E0      		ldi r31,hi8(122)
+ 366 01e0 8081      		ld r24,Z
+ 367 01e2 8064      		ori r24,lo8(64)
+ 368 01e4 8C93      		st X,r24
+ 369               	.L16:
+ 370               	.LM29:
+ 371 01e6 EAE7      		ldi r30,lo8(122)
+ 372 01e8 F0E0      		ldi r31,hi8(122)
+ 373 01ea 8081      		ld r24,Z
+ 374 01ec 882F      		mov r24,r24
+ 375 01ee 90E0      		ldi r25,lo8(0)
+ 376 01f0 8074      		andi r24,lo8(64)
+ 377 01f2 9070      		andi r25,hi8(64)
+ 378 01f4 0097      		sbiw r24,0
+ 379 01f6 01F4      		brne .L16
+ 380               	.LM30:
+ 381 01f8 E8E7      		ldi r30,lo8(120)
+ 382 01fa F0E0      		ldi r31,hi8(120)
+ 383 01fc 8081      		ld r24,Z
+ 384 01fe 282F      		mov r18,r24
+ 385 0200 30E0      		ldi r19,lo8(0)
+ 386 0202 E9E7      		ldi r30,lo8(121)
+ 387 0204 F0E0      		ldi r31,hi8(121)
+ 388 0206 8081      		ld r24,Z
+ 389 0208 882F      		mov r24,r24
+ 390 020a 90E0      		ldi r25,lo8(0)
+ 391 020c 982F      		mov r25,r24
+ 392 020e 8827      		clr r24
+ 393 0210 822B      		or r24,r18
+ 394 0212 932B      		or r25,r19
+ 395               	/* epilogue: frame size=1 */
+ 396 0214 2196      		adiw r28,1
+ 397 0216 0FB6      		in __tmp_reg__,__SREG__
+ 398 0218 F894      		cli
+ 399 021a DEBF      		out __SP_H__,r29
+ 400 021c 0FBE      		out __SREG__,__tmp_reg__
+ 401 021e CDBF      		out __SP_L__,r28
+ 402 0220 DF91      		pop r29
+ 403 0222 CF91      		pop r28
+ 404 0224 0895      		ret
+ 405               	/* epilogue end (size=9) */
+ 406               	/* function a2dConvert10bit size 70 (51) */
+ 407               	.LFE9:
+ 409               	.global	a2dConvert8bit
+ 411               	a2dConvert8bit:
+ 412               	.LFB10:
+ 413               	.LM31:
+ 414               	/* prologue: frame size=1 */
+ 415 0226 CF93      		push r28
+ 416 0228 DF93      		push r29
+ 417 022a CDB7      		in r28,__SP_L__
+ 418 022c DEB7      		in r29,__SP_H__
+ 419 022e 2197      		sbiw r28,1
+ 420 0230 0FB6      		in __tmp_reg__,__SREG__
+ 421 0232 F894      		cli
+ 422 0234 DEBF      		out __SP_H__,r29
+ 423 0236 0FBE      		out __SREG__,__tmp_reg__
+ 424 0238 CDBF      		out __SP_L__,r28
+ 425               	/* prologue end (size=10) */
+ 426 023a 8983      		std Y+1,r24
+ 427               	.LM32:
+ 428 023c 8981      		ldd r24,Y+1
+ 429 023e 0E94 0000 		call a2dConvert10bit
+ 430 0242 9695      		lsr r25
+ 431 0244 8795      		ror r24
+ 432 0246 9695      		lsr r25
+ 433 0248 8795      		ror r24
+ 434 024a 882F      		mov r24,r24
+ 435 024c 90E0      		ldi r25,lo8(0)
+ 436               	/* epilogue: frame size=1 */
+ 437 024e 2196      		adiw r28,1
+ 438 0250 0FB6      		in __tmp_reg__,__SREG__
+ 439 0252 F894      		cli
+ 440 0254 DEBF      		out __SP_H__,r29
+ 441 0256 0FBE      		out __SREG__,__tmp_reg__
+ 442 0258 CDBF      		out __SP_L__,r28
+ 443 025a DF91      		pop r29
+ 444 025c CF91      		pop r28
+ 445 025e 0895      		ret
+ 446               	/* epilogue end (size=9) */
+ 447               	/* function a2dConvert8bit size 29 (10) */
+ 448               	.LFE10:
+ 450               	.global	__vector_21
+ 452               	__vector_21:
+ 453               	.LFB11:
+ 454               	.LM33:
+ 455               	/* prologue: frame size=0 */
+ 456 0260 1F92      		push __zero_reg__
+ 457 0262 0F92      		push __tmp_reg__
+ 458 0264 0FB6      		in __tmp_reg__,__SREG__
+ 459 0266 0F92      		push __tmp_reg__
+ 460 0268 1124      		clr __zero_reg__
+ 461 026a 8F93      		push r24
+ 462 026c CF93      		push r28
+ 463 026e DF93      		push r29
+ 464 0270 CDB7      		in r28,__SP_L__
+ 465 0272 DEB7      		in r29,__SP_H__
+ 466               	/* prologue end (size=10) */
+ 467               	.LM34:
+ 468 0274 8FEF      		ldi r24,lo8(-1)
+ 469 0276 8093 0000 		sts a2dCompleteFlag,r24
+ 470               	/* epilogue: frame size=0 */
+ 471 027a DF91      		pop r29
+ 472 027c CF91      		pop r28
+ 473 027e 8F91      		pop r24
+ 474 0280 0F90      		pop __tmp_reg__
+ 475 0282 0FBE      		out __SREG__,__tmp_reg__
+ 476 0284 0F90      		pop __tmp_reg__
+ 477 0286 1F90      		pop __zero_reg__
+ 478 0288 1895      		reti
+ 479               	/* epilogue end (size=8) */
+ 480               	/* function __vector_21 size 21 (3) */
+ 481               	.LFE11:
+ 483               		.comm a2dCompleteFlag,1,1
+ 580               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 a2d.c
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:6      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:19     .text:00000000 a2dInit
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:118    .text:00000084 a2dSetPrescaler
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:161    .text:000000c0 a2dSetReference
+                            *COM*:00000001 a2dCompleteFlag
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:82     .text:00000058 a2dOff
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:217    .text:00000116 a2dSetChannel
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:261    .text:00000154 a2dStartConvert
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:296    .text:0000017e a2dIsComplete
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:323    .text:0000019a a2dConvert10bit
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:411    .text:00000226 a2dConvert8bit
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccVgiQaV.s:452    .text:00000260 __vector_21
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss

@@ -1,0 +1,649 @@
+   1               		.file	"buffer.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	bufferInit
+  19               	bufferInit:
+  20               	.LFB2:
+  21               	.LM1:
+  22               	/* prologue: frame size=7 */
+  23 0000 CF93      		push r28
+  24 0002 DF93      		push r29
+  25 0004 CDB7      		in r28,__SP_L__
+  26 0006 DEB7      		in r29,__SP_H__
+  27 0008 2797      		sbiw r28,7
+  28 000a 0FB6      		in __tmp_reg__,__SREG__
+  29 000c F894      		cli
+  30 000e DEBF      		out __SP_H__,r29
+  31 0010 0FBE      		out __SREG__,__tmp_reg__
+  32 0012 CDBF      		out __SP_L__,r28
+  33               	/* prologue end (size=10) */
+  34 0014 9B83      		std Y+3,r25
+  35 0016 8A83      		std Y+2,r24
+  36 0018 7D83      		std Y+5,r23
+  37 001a 6C83      		std Y+4,r22
+  38 001c 5F83      		std Y+7,r21
+  39 001e 4E83      		std Y+6,r20
+  40               	.LM2:
+  41 0020 EFE5      		ldi r30,lo8(95)
+  42 0022 F0E0      		ldi r31,hi8(95)
+  43 0024 8081      		ld r24,Z
+  44 0026 8983      		std Y+1,r24
+  45               	/* #APP */
+  46 0028 F894      		cli
+  47               	.LM3:
+  48               	/* #NOAPP */
+  49 002a EA81      		ldd r30,Y+2
+  50 002c FB81      		ldd r31,Y+3
+  51 002e 8C81      		ldd r24,Y+4
+  52 0030 9D81      		ldd r25,Y+5
+  53 0032 9183      		std Z+1,r25
+  54 0034 8083      		st Z,r24
+  55               	.LM4:
+  56 0036 EA81      		ldd r30,Y+2
+  57 0038 FB81      		ldd r31,Y+3
+  58 003a 8E81      		ldd r24,Y+6
+  59 003c 9F81      		ldd r25,Y+7
+  60 003e 9383      		std Z+3,r25
+  61 0040 8283      		std Z+2,r24
+  62               	.LM5:
+  63 0042 EA81      		ldd r30,Y+2
+  64 0044 FB81      		ldd r31,Y+3
+  65 0046 1782      		std Z+7,__zero_reg__
+  66 0048 1682      		std Z+6,__zero_reg__
+  67               	.LM6:
+  68 004a EA81      		ldd r30,Y+2
+  69 004c FB81      		ldd r31,Y+3
+  70 004e 1582      		std Z+5,__zero_reg__
+  71 0050 1482      		std Z+4,__zero_reg__
+  72               	.LM7:
+  73 0052 EFE5      		ldi r30,lo8(95)
+  74 0054 F0E0      		ldi r31,hi8(95)
+  75 0056 8981      		ldd r24,Y+1
+  76 0058 8083      		st Z,r24
+  77               	/* epilogue: frame size=7 */
+  78 005a 2796      		adiw r28,7
+  79 005c 0FB6      		in __tmp_reg__,__SREG__
+  80 005e F894      		cli
+  81 0060 DEBF      		out __SP_H__,r29
+  82 0062 0FBE      		out __SREG__,__tmp_reg__
+  83 0064 CDBF      		out __SP_L__,r28
+  84 0066 DF91      		pop r29
+  85 0068 CF91      		pop r28
+  86 006a 0895      		ret
+  87               	/* epilogue end (size=9) */
+  88               	/* function bufferInit size 55 (36) */
+  89               	.LFE2:
+  91               	.global	bufferGetFromFront
+  93               	bufferGetFromFront:
+  94               	.LFB3:
+  95               	.LM8:
+  96               	/* prologue: frame size=4 */
+  97 006c CF93      		push r28
+  98 006e DF93      		push r29
+  99 0070 CDB7      		in r28,__SP_L__
+ 100 0072 DEB7      		in r29,__SP_H__
+ 101 0074 2497      		sbiw r28,4
+ 102 0076 0FB6      		in __tmp_reg__,__SREG__
+ 103 0078 F894      		cli
+ 104 007a DEBF      		out __SP_H__,r29
+ 105 007c 0FBE      		out __SREG__,__tmp_reg__
+ 106 007e CDBF      		out __SP_L__,r28
+ 107               	/* prologue end (size=10) */
+ 108 0080 9C83      		std Y+4,r25
+ 109 0082 8B83      		std Y+3,r24
+ 110               	.LM9:
+ 111 0084 1A82      		std Y+2,__zero_reg__
+ 112               	.LM10:
+ 113 0086 EFE5      		ldi r30,lo8(95)
+ 114 0088 F0E0      		ldi r31,hi8(95)
+ 115 008a 8081      		ld r24,Z
+ 116 008c 8983      		std Y+1,r24
+ 117               	/* #APP */
+ 118 008e F894      		cli
+ 119               	.LM11:
+ 120               	/* #NOAPP */
+ 121 0090 EB81      		ldd r30,Y+3
+ 122 0092 FC81      		ldd r31,Y+4
+ 123 0094 8481      		ldd r24,Z+4
+ 124 0096 9581      		ldd r25,Z+5
+ 125 0098 0097      		sbiw r24,0
+ 126 009a 01F0      		breq .L4
+ 127               	.LM12:
+ 128 009c EB81      		ldd r30,Y+3
+ 129 009e FC81      		ldd r31,Y+4
+ 130 00a0 2081      		ld r18,Z
+ 131 00a2 3181      		ldd r19,Z+1
+ 132 00a4 EB81      		ldd r30,Y+3
+ 133 00a6 FC81      		ldd r31,Y+4
+ 134 00a8 8681      		ldd r24,Z+6
+ 135 00aa 9781      		ldd r25,Z+7
+ 136 00ac F901      		movw r30,r18
+ 137 00ae E80F      		add r30,r24
+ 138 00b0 F91F      		adc r31,r25
+ 139 00b2 8081      		ld r24,Z
+ 140 00b4 8A83      		std Y+2,r24
+ 141               	.LM13:
+ 142 00b6 EB81      		ldd r30,Y+3
+ 143 00b8 FC81      		ldd r31,Y+4
+ 144 00ba 8681      		ldd r24,Z+6
+ 145 00bc 9781      		ldd r25,Z+7
+ 146 00be 0196      		adiw r24,1
+ 147 00c0 EB81      		ldd r30,Y+3
+ 148 00c2 FC81      		ldd r31,Y+4
+ 149 00c4 9783      		std Z+7,r25
+ 150 00c6 8683      		std Z+6,r24
+ 151               	.LM14:
+ 152 00c8 EB81      		ldd r30,Y+3
+ 153 00ca FC81      		ldd r31,Y+4
+ 154 00cc 2681      		ldd r18,Z+6
+ 155 00ce 3781      		ldd r19,Z+7
+ 156 00d0 EB81      		ldd r30,Y+3
+ 157 00d2 FC81      		ldd r31,Y+4
+ 158 00d4 8281      		ldd r24,Z+2
+ 159 00d6 9381      		ldd r25,Z+3
+ 160 00d8 2817      		cp r18,r24
+ 161 00da 3907      		cpc r19,r25
+ 162 00dc 00F0      		brlo .L6
+ 163               	.LM15:
+ 164 00de EB81      		ldd r30,Y+3
+ 165 00e0 FC81      		ldd r31,Y+4
+ 166 00e2 2681      		ldd r18,Z+6
+ 167 00e4 3781      		ldd r19,Z+7
+ 168 00e6 EB81      		ldd r30,Y+3
+ 169 00e8 FC81      		ldd r31,Y+4
+ 170 00ea 8281      		ldd r24,Z+2
+ 171 00ec 9381      		ldd r25,Z+3
+ 172 00ee A901      		movw r20,r18
+ 173 00f0 481B      		sub r20,r24
+ 174 00f2 590B      		sbc r21,r25
+ 175 00f4 CA01      		movw r24,r20
+ 176 00f6 EB81      		ldd r30,Y+3
+ 177 00f8 FC81      		ldd r31,Y+4
+ 178 00fa 9783      		std Z+7,r25
+ 179 00fc 8683      		std Z+6,r24
+ 180               	.L6:
+ 181               	.LM16:
+ 182 00fe EB81      		ldd r30,Y+3
+ 183 0100 FC81      		ldd r31,Y+4
+ 184 0102 8481      		ldd r24,Z+4
+ 185 0104 9581      		ldd r25,Z+5
+ 186 0106 0197      		sbiw r24,1
+ 187 0108 EB81      		ldd r30,Y+3
+ 188 010a FC81      		ldd r31,Y+4
+ 189 010c 9583      		std Z+5,r25
+ 190 010e 8483      		std Z+4,r24
+ 191               	.L4:
+ 192               	.LM17:
+ 193 0110 EFE5      		ldi r30,lo8(95)
+ 194 0112 F0E0      		ldi r31,hi8(95)
+ 195 0114 8981      		ldd r24,Y+1
+ 196 0116 8083      		st Z,r24
+ 197               	.LM18:
+ 198 0118 8A81      		ldd r24,Y+2
+ 199 011a 882F      		mov r24,r24
+ 200 011c 90E0      		ldi r25,lo8(0)
+ 201               	/* epilogue: frame size=4 */
+ 202 011e 2496      		adiw r28,4
+ 203 0120 0FB6      		in __tmp_reg__,__SREG__
+ 204 0122 F894      		cli
+ 205 0124 DEBF      		out __SP_H__,r29
+ 206 0126 0FBE      		out __SREG__,__tmp_reg__
+ 207 0128 CDBF      		out __SP_L__,r28
+ 208 012a DF91      		pop r29
+ 209 012c CF91      		pop r28
+ 210 012e 0895      		ret
+ 211               	/* epilogue end (size=9) */
+ 212               	/* function bufferGetFromFront size 99 (80) */
+ 213               	.LFE3:
+ 215               	.global	bufferDumpFromFront
+ 217               	bufferDumpFromFront:
+ 218               	.LFB4:
+ 219               	.LM19:
+ 220               	/* prologue: frame size=5 */
+ 221 0130 CF93      		push r28
+ 222 0132 DF93      		push r29
+ 223 0134 CDB7      		in r28,__SP_L__
+ 224 0136 DEB7      		in r29,__SP_H__
+ 225 0138 2597      		sbiw r28,5
+ 226 013a 0FB6      		in __tmp_reg__,__SREG__
+ 227 013c F894      		cli
+ 228 013e DEBF      		out __SP_H__,r29
+ 229 0140 0FBE      		out __SREG__,__tmp_reg__
+ 230 0142 CDBF      		out __SP_L__,r28
+ 231               	/* prologue end (size=10) */
+ 232 0144 9B83      		std Y+3,r25
+ 233 0146 8A83      		std Y+2,r24
+ 234 0148 7D83      		std Y+5,r23
+ 235 014a 6C83      		std Y+4,r22
+ 236               	.LM20:
+ 237 014c EFE5      		ldi r30,lo8(95)
+ 238 014e F0E0      		ldi r31,hi8(95)
+ 239 0150 8081      		ld r24,Z
+ 240 0152 8983      		std Y+1,r24
+ 241               	/* #APP */
+ 242 0154 F894      		cli
+ 243               	.LM21:
+ 244               	/* #NOAPP */
+ 245 0156 EA81      		ldd r30,Y+2
+ 246 0158 FB81      		ldd r31,Y+3
+ 247 015a 2481      		ldd r18,Z+4
+ 248 015c 3581      		ldd r19,Z+5
+ 249 015e 8C81      		ldd r24,Y+4
+ 250 0160 9D81      		ldd r25,Y+5
+ 251 0162 8217      		cp r24,r18
+ 252 0164 9307      		cpc r25,r19
+ 253 0166 00F4      		brsh .L10
+ 254               	.LM22:
+ 255 0168 EA81      		ldd r30,Y+2
+ 256 016a FB81      		ldd r31,Y+3
+ 257 016c 2681      		ldd r18,Z+6
+ 258 016e 3781      		ldd r19,Z+7
+ 259 0170 8C81      		ldd r24,Y+4
+ 260 0172 9D81      		ldd r25,Y+5
+ 261 0174 820F      		add r24,r18
+ 262 0176 931F      		adc r25,r19
+ 263 0178 EA81      		ldd r30,Y+2
+ 264 017a FB81      		ldd r31,Y+3
+ 265 017c 9783      		std Z+7,r25
+ 266 017e 8683      		std Z+6,r24
+ 267               	.LM23:
+ 268 0180 EA81      		ldd r30,Y+2
+ 269 0182 FB81      		ldd r31,Y+3
+ 270 0184 2681      		ldd r18,Z+6
+ 271 0186 3781      		ldd r19,Z+7
+ 272 0188 EA81      		ldd r30,Y+2
+ 273 018a FB81      		ldd r31,Y+3
+ 274 018c 8281      		ldd r24,Z+2
+ 275 018e 9381      		ldd r25,Z+3
+ 276 0190 2817      		cp r18,r24
+ 277 0192 3907      		cpc r19,r25
+ 278 0194 00F0      		brlo .L12
+ 279               	.LM24:
+ 280 0196 EA81      		ldd r30,Y+2
+ 281 0198 FB81      		ldd r31,Y+3
+ 282 019a 2681      		ldd r18,Z+6
+ 283 019c 3781      		ldd r19,Z+7
+ 284 019e EA81      		ldd r30,Y+2
+ 285 01a0 FB81      		ldd r31,Y+3
+ 286 01a2 8281      		ldd r24,Z+2
+ 287 01a4 9381      		ldd r25,Z+3
+ 288 01a6 A901      		movw r20,r18
+ 289 01a8 481B      		sub r20,r24
+ 290 01aa 590B      		sbc r21,r25
+ 291 01ac CA01      		movw r24,r20
+ 292 01ae EA81      		ldd r30,Y+2
+ 293 01b0 FB81      		ldd r31,Y+3
+ 294 01b2 9783      		std Z+7,r25
+ 295 01b4 8683      		std Z+6,r24
+ 296               	.L12:
+ 297               	.LM25:
+ 298 01b6 EA81      		ldd r30,Y+2
+ 299 01b8 FB81      		ldd r31,Y+3
+ 300 01ba 2481      		ldd r18,Z+4
+ 301 01bc 3581      		ldd r19,Z+5
+ 302 01be 8C81      		ldd r24,Y+4
+ 303 01c0 9D81      		ldd r25,Y+5
+ 304 01c2 A901      		movw r20,r18
+ 305 01c4 481B      		sub r20,r24
+ 306 01c6 590B      		sbc r21,r25
+ 307 01c8 CA01      		movw r24,r20
+ 308 01ca EA81      		ldd r30,Y+2
+ 309 01cc FB81      		ldd r31,Y+3
+ 310 01ce 9583      		std Z+5,r25
+ 311 01d0 8483      		std Z+4,r24
+ 312 01d2 00C0      		rjmp .L14
+ 313               	.L10:
+ 314               	.LM26:
+ 315 01d4 EA81      		ldd r30,Y+2
+ 316 01d6 FB81      		ldd r31,Y+3
+ 317 01d8 1582      		std Z+5,__zero_reg__
+ 318 01da 1482      		std Z+4,__zero_reg__
+ 319               	.L14:
+ 320               	.LM27:
+ 321 01dc EFE5      		ldi r30,lo8(95)
+ 322 01de F0E0      		ldi r31,hi8(95)
+ 323 01e0 8981      		ldd r24,Y+1
+ 324 01e2 8083      		st Z,r24
+ 325               	/* epilogue: frame size=5 */
+ 326 01e4 2596      		adiw r28,5
+ 327 01e6 0FB6      		in __tmp_reg__,__SREG__
+ 328 01e8 F894      		cli
+ 329 01ea DEBF      		out __SP_H__,r29
+ 330 01ec 0FBE      		out __SREG__,__tmp_reg__
+ 331 01ee CDBF      		out __SP_L__,r28
+ 332 01f0 DF91      		pop r29
+ 333 01f2 CF91      		pop r28
+ 334 01f4 0895      		ret
+ 335               	/* epilogue end (size=9) */
+ 336               	/* function bufferDumpFromFront size 100 (81) */
+ 337               	.LFE4:
+ 339               	.global	bufferGetAtIndex
+ 341               	bufferGetAtIndex:
+ 342               	.LFB5:
+ 343               	.LM28:
+ 344               	/* prologue: frame size=6 */
+ 345 01f6 0F93      		push r16
+ 346 01f8 1F93      		push r17
+ 347 01fa CF93      		push r28
+ 348 01fc DF93      		push r29
+ 349 01fe CDB7      		in r28,__SP_L__
+ 350 0200 DEB7      		in r29,__SP_H__
+ 351 0202 2697      		sbiw r28,6
+ 352 0204 0FB6      		in __tmp_reg__,__SREG__
+ 353 0206 F894      		cli
+ 354 0208 DEBF      		out __SP_H__,r29
+ 355 020a 0FBE      		out __SREG__,__tmp_reg__
+ 356 020c CDBF      		out __SP_L__,r28
+ 357               	/* prologue end (size=12) */
+ 358 020e 9C83      		std Y+4,r25
+ 359 0210 8B83      		std Y+3,r24
+ 360 0212 7E83      		std Y+6,r23
+ 361 0214 6D83      		std Y+5,r22
+ 362               	.LM29:
+ 363 0216 EFE5      		ldi r30,lo8(95)
+ 364 0218 F0E0      		ldi r31,hi8(95)
+ 365 021a 8081      		ld r24,Z
+ 366 021c 8A83      		std Y+2,r24
+ 367               	/* #APP */
+ 368 021e F894      		cli
+ 369               	.LM30:
+ 370               	/* #NOAPP */
+ 371 0220 EB81      		ldd r30,Y+3
+ 372 0222 FC81      		ldd r31,Y+4
+ 373 0224 0081      		ld r16,Z
+ 374 0226 1181      		ldd r17,Z+1
+ 375 0228 EB81      		ldd r30,Y+3
+ 376 022a FC81      		ldd r31,Y+4
+ 377 022c 2681      		ldd r18,Z+6
+ 378 022e 3781      		ldd r19,Z+7
+ 379 0230 8D81      		ldd r24,Y+5
+ 380 0232 9E81      		ldd r25,Y+6
+ 381 0234 820F      		add r24,r18
+ 382 0236 931F      		adc r25,r19
+ 383 0238 EB81      		ldd r30,Y+3
+ 384 023a FC81      		ldd r31,Y+4
+ 385 023c 2281      		ldd r18,Z+2
+ 386 023e 3381      		ldd r19,Z+3
+ 387 0240 B901      		movw r22,r18
+ 388 0242 0E94 0000 		call __udivmodhi4
+ 389 0246 F801      		movw r30,r16
+ 390 0248 E80F      		add r30,r24
+ 391 024a F91F      		adc r31,r25
+ 392 024c 8081      		ld r24,Z
+ 393 024e 8983      		std Y+1,r24
+ 394               	.LM31:
+ 395 0250 EFE5      		ldi r30,lo8(95)
+ 396 0252 F0E0      		ldi r31,hi8(95)
+ 397 0254 8A81      		ldd r24,Y+2
+ 398 0256 8083      		st Z,r24
+ 399               	.LM32:
+ 400 0258 8981      		ldd r24,Y+1
+ 401 025a 882F      		mov r24,r24
+ 402 025c 90E0      		ldi r25,lo8(0)
+ 403               	/* epilogue: frame size=6 */
+ 404 025e 2696      		adiw r28,6
+ 405 0260 0FB6      		in __tmp_reg__,__SREG__
+ 406 0262 F894      		cli
+ 407 0264 DEBF      		out __SP_H__,r29
+ 408 0266 0FBE      		out __SREG__,__tmp_reg__
+ 409 0268 CDBF      		out __SP_L__,r28
+ 410 026a DF91      		pop r29
+ 411 026c CF91      		pop r28
+ 412 026e 1F91      		pop r17
+ 413 0270 0F91      		pop r16
+ 414 0272 0895      		ret
+ 415               	/* epilogue end (size=11) */
+ 416               	/* function bufferGetAtIndex size 64 (41) */
+ 417               	.LFE5:
+ 419               	.global	bufferAddToEnd
+ 421               	bufferAddToEnd:
+ 422               	.LFB6:
+ 423               	.LM33:
+ 424               	/* prologue: frame size=6 */
+ 425 0274 0F93      		push r16
+ 426 0276 1F93      		push r17
+ 427 0278 CF93      		push r28
+ 428 027a DF93      		push r29
+ 429 027c CDB7      		in r28,__SP_L__
+ 430 027e DEB7      		in r29,__SP_H__
+ 431 0280 2697      		sbiw r28,6
+ 432 0282 0FB6      		in __tmp_reg__,__SREG__
+ 433 0284 F894      		cli
+ 434 0286 DEBF      		out __SP_H__,r29
+ 435 0288 0FBE      		out __SREG__,__tmp_reg__
+ 436 028a CDBF      		out __SP_L__,r28
+ 437               	/* prologue end (size=12) */
+ 438 028c 9B83      		std Y+3,r25
+ 439 028e 8A83      		std Y+2,r24
+ 440 0290 6C83      		std Y+4,r22
+ 441               	.LM34:
+ 442 0292 EFE5      		ldi r30,lo8(95)
+ 443 0294 F0E0      		ldi r31,hi8(95)
+ 444 0296 8081      		ld r24,Z
+ 445 0298 8983      		std Y+1,r24
+ 446               	/* #APP */
+ 447 029a F894      		cli
+ 448               	.LM35:
+ 449               	/* #NOAPP */
+ 450 029c EA81      		ldd r30,Y+2
+ 451 029e FB81      		ldd r31,Y+3
+ 452 02a0 2481      		ldd r18,Z+4
+ 453 02a2 3581      		ldd r19,Z+5
+ 454 02a4 EA81      		ldd r30,Y+2
+ 455 02a6 FB81      		ldd r31,Y+3
+ 456 02a8 8281      		ldd r24,Z+2
+ 457 02aa 9381      		ldd r25,Z+3
+ 458 02ac 2817      		cp r18,r24
+ 459 02ae 3907      		cpc r19,r25
+ 460 02b0 00F4      		brsh .L19
+ 461               	.LM36:
+ 462 02b2 EA81      		ldd r30,Y+2
+ 463 02b4 FB81      		ldd r31,Y+3
+ 464 02b6 0081      		ld r16,Z
+ 465 02b8 1181      		ldd r17,Z+1
+ 466 02ba EA81      		ldd r30,Y+2
+ 467 02bc FB81      		ldd r31,Y+3
+ 468 02be 2681      		ldd r18,Z+6
+ 469 02c0 3781      		ldd r19,Z+7
+ 470 02c2 EA81      		ldd r30,Y+2
+ 471 02c4 FB81      		ldd r31,Y+3
+ 472 02c6 8481      		ldd r24,Z+4
+ 473 02c8 9581      		ldd r25,Z+5
+ 474 02ca 820F      		add r24,r18
+ 475 02cc 931F      		adc r25,r19
+ 476 02ce EA81      		ldd r30,Y+2
+ 477 02d0 FB81      		ldd r31,Y+3
+ 478 02d2 2281      		ldd r18,Z+2
+ 479 02d4 3381      		ldd r19,Z+3
+ 480 02d6 B901      		movw r22,r18
+ 481 02d8 0E94 0000 		call __udivmodhi4
+ 482 02dc F801      		movw r30,r16
+ 483 02de E80F      		add r30,r24
+ 484 02e0 F91F      		adc r31,r25
+ 485 02e2 8C81      		ldd r24,Y+4
+ 486 02e4 8083      		st Z,r24
+ 487               	.LM37:
+ 488 02e6 EA81      		ldd r30,Y+2
+ 489 02e8 FB81      		ldd r31,Y+3
+ 490 02ea 8481      		ldd r24,Z+4
+ 491 02ec 9581      		ldd r25,Z+5
+ 492 02ee 0196      		adiw r24,1
+ 493 02f0 EA81      		ldd r30,Y+2
+ 494 02f2 FB81      		ldd r31,Y+3
+ 495 02f4 9583      		std Z+5,r25
+ 496 02f6 8483      		std Z+4,r24
+ 497               	.LM38:
+ 498 02f8 EFE5      		ldi r30,lo8(95)
+ 499 02fa F0E0      		ldi r31,hi8(95)
+ 500 02fc 8981      		ldd r24,Y+1
+ 501 02fe 8083      		st Z,r24
+ 502               	.LM39:
+ 503 0300 8FEF      		ldi r24,lo8(255)
+ 504 0302 90E0      		ldi r25,hi8(255)
+ 505 0304 9E83      		std Y+6,r25
+ 506 0306 8D83      		std Y+5,r24
+ 507 0308 00C0      		rjmp .L21
+ 508               	.L19:
+ 509               	.LM40:
+ 510 030a EFE5      		ldi r30,lo8(95)
+ 511 030c F0E0      		ldi r31,hi8(95)
+ 512 030e 8981      		ldd r24,Y+1
+ 513 0310 8083      		st Z,r24
+ 514               	.LM41:
+ 515 0312 1E82      		std Y+6,__zero_reg__
+ 516 0314 1D82      		std Y+5,__zero_reg__
+ 517               	.L21:
+ 518 0316 8D81      		ldd r24,Y+5
+ 519 0318 9E81      		ldd r25,Y+6
+ 520               	/* epilogue: frame size=6 */
+ 521 031a 2696      		adiw r28,6
+ 522 031c 0FB6      		in __tmp_reg__,__SREG__
+ 523 031e F894      		cli
+ 524 0320 DEBF      		out __SP_H__,r29
+ 525 0322 0FBE      		out __SREG__,__tmp_reg__
+ 526 0324 CDBF      		out __SP_L__,r28
+ 527 0326 DF91      		pop r29
+ 528 0328 CF91      		pop r28
+ 529 032a 1F91      		pop r17
+ 530 032c 0F91      		pop r16
+ 531 032e 0895      		ret
+ 532               	/* epilogue end (size=11) */
+ 533               	/* function bufferAddToEnd size 95 (72) */
+ 534               	.LFE6:
+ 536               	.global	bufferIsNotFull
+ 538               	bufferIsNotFull:
+ 539               	.LFB7:
+ 540               	.LM42:
+ 541               	/* prologue: frame size=5 */
+ 542 0330 CF93      		push r28
+ 543 0332 DF93      		push r29
+ 544 0334 CDB7      		in r28,__SP_L__
+ 545 0336 DEB7      		in r29,__SP_H__
+ 546 0338 2597      		sbiw r28,5
+ 547 033a 0FB6      		in __tmp_reg__,__SREG__
+ 548 033c F894      		cli
+ 549 033e DEBF      		out __SP_H__,r29
+ 550 0340 0FBE      		out __SREG__,__tmp_reg__
+ 551 0342 CDBF      		out __SP_L__,r28
+ 552               	/* prologue end (size=10) */
+ 553 0344 9D83      		std Y+5,r25
+ 554 0346 8C83      		std Y+4,r24
+ 555               	.LM43:
+ 556 0348 EFE5      		ldi r30,lo8(95)
+ 557 034a F0E0      		ldi r31,hi8(95)
+ 558 034c 8081      		ld r24,Z
+ 559 034e 8B83      		std Y+3,r24
+ 560               	/* #APP */
+ 561 0350 F894      		cli
+ 562               	.LM44:
+ 563               	/* #NOAPP */
+ 564 0352 EC81      		ldd r30,Y+4
+ 565 0354 FD81      		ldd r31,Y+5
+ 566 0356 2281      		ldd r18,Z+2
+ 567 0358 3381      		ldd r19,Z+3
+ 568 035a EC81      		ldd r30,Y+4
+ 569 035c FD81      		ldd r31,Y+5
+ 570 035e 8481      		ldd r24,Z+4
+ 571 0360 9581      		ldd r25,Z+5
+ 572 0362 A901      		movw r20,r18
+ 573 0364 481B      		sub r20,r24
+ 574 0366 590B      		sbc r21,r25
+ 575 0368 CA01      		movw r24,r20
+ 576 036a 9A83      		std Y+2,r25
+ 577 036c 8983      		std Y+1,r24
+ 578               	.LM45:
+ 579 036e EFE5      		ldi r30,lo8(95)
+ 580 0370 F0E0      		ldi r31,hi8(95)
+ 581 0372 8B81      		ldd r24,Y+3
+ 582 0374 8083      		st Z,r24
+ 583               	.LM46:
+ 584 0376 8981      		ldd r24,Y+1
+ 585 0378 9A81      		ldd r25,Y+2
+ 586               	/* epilogue: frame size=5 */
+ 587 037a 2596      		adiw r28,5
+ 588 037c 0FB6      		in __tmp_reg__,__SREG__
+ 589 037e F894      		cli
+ 590 0380 DEBF      		out __SP_H__,r29
+ 591 0382 0FBE      		out __SREG__,__tmp_reg__
+ 592 0384 CDBF      		out __SP_L__,r28
+ 593 0386 DF91      		pop r29
+ 594 0388 CF91      		pop r28
+ 595 038a 0895      		ret
+ 596               	/* epilogue end (size=9) */
+ 597               	/* function bufferIsNotFull size 47 (28) */
+ 598               	.LFE7:
+ 600               	.global	bufferFlush
+ 602               	bufferFlush:
+ 603               	.LFB8:
+ 604               	.LM47:
+ 605               	/* prologue: frame size=3 */
+ 606 038c CF93      		push r28
+ 607 038e DF93      		push r29
+ 608 0390 CDB7      		in r28,__SP_L__
+ 609 0392 DEB7      		in r29,__SP_H__
+ 610 0394 2397      		sbiw r28,3
+ 611 0396 0FB6      		in __tmp_reg__,__SREG__
+ 612 0398 F894      		cli
+ 613 039a DEBF      		out __SP_H__,r29
+ 614 039c 0FBE      		out __SREG__,__tmp_reg__
+ 615 039e CDBF      		out __SP_L__,r28
+ 616               	/* prologue end (size=10) */
+ 617 03a0 9B83      		std Y+3,r25
+ 618 03a2 8A83      		std Y+2,r24
+ 619               	.LM48:
+ 620 03a4 EFE5      		ldi r30,lo8(95)
+ 621 03a6 F0E0      		ldi r31,hi8(95)
+ 622 03a8 8081      		ld r24,Z
+ 623 03aa 8983      		std Y+1,r24
+ 624               	/* #APP */
+ 625 03ac F894      		cli
+ 626               	.LM49:
+ 627               	/* #NOAPP */
+ 628 03ae EA81      		ldd r30,Y+2
+ 629 03b0 FB81      		ldd r31,Y+3
+ 630 03b2 1582      		std Z+5,__zero_reg__
+ 631 03b4 1482      		std Z+4,__zero_reg__
+ 632               	.LM50:
+ 633 03b6 EFE5      		ldi r30,lo8(95)
+ 634 03b8 F0E0      		ldi r31,hi8(95)
+ 635 03ba 8981      		ldd r24,Y+1
+ 636 03bc 8083      		st Z,r24
+ 637               	/* epilogue: frame size=3 */
+ 638 03be 2396      		adiw r28,3
+ 639 03c0 0FB6      		in __tmp_reg__,__SREG__
+ 640 03c2 F894      		cli
+ 641 03c4 DEBF      		out __SP_H__,r29
+ 642 03c6 0FBE      		out __SREG__,__tmp_reg__
+ 643 03c8 CDBF      		out __SP_L__,r28
+ 644 03ca DF91      		pop r29
+ 645 03cc CF91      		pop r28
+ 646 03ce 0895      		ret
+ 647               	/* epilogue end (size=9) */
+ 648               	/* function bufferFlush size 35 (16) */
+ 649               	.LFE8:
+ 723               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 buffer.c
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:6      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:19     .text:00000000 bufferInit
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:93     .text:0000006c bufferGetFromFront
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:217    .text:00000130 bufferDumpFromFront
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:341    .text:000001f6 bufferGetAtIndex
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:421    .text:00000274 bufferAddToEnd
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:538    .text:00000330 bufferIsNotFull
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccwRfSwP.s:602    .text:0000038c bufferFlush
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__udivmodhi4

@@ -1,0 +1,790 @@
+   1               		.file	"servo.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	servoInit
+  19               	servoInit:
+  20               	.LFB2:
+  21               	.LM1:
+  22               	/* prologue: frame size=3 */
+  23 0000 CF93      		push r28
+  24 0002 DF93      		push r29
+  25 0004 CDB7      		in r28,__SP_L__
+  26 0006 DEB7      		in r29,__SP_H__
+  27 0008 2397      		sbiw r28,3
+  28 000a 0FB6      		in __tmp_reg__,__SREG__
+  29 000c F894      		cli
+  30 000e DEBF      		out __SP_H__,r29
+  31 0010 0FBE      		out __SREG__,__tmp_reg__
+  32 0012 CDBF      		out __SP_L__,r28
+  33               	/* prologue end (size=10) */
+  34               	.LM2:
+  35 0014 AFE6      		ldi r26,lo8(111)
+  36 0016 B0E0      		ldi r27,hi8(111)
+  37 0018 EFE6      		ldi r30,lo8(111)
+  38 001a F0E0      		ldi r31,hi8(111)
+  39 001c 8081      		ld r24,Z
+  40 001e 8D7F      		andi r24,lo8(-3)
+  41 0020 8C93      		st X,r24
+  42               	.LM3:
+  43 0022 84E0      		ldi r24,lo8(4)
+  44 0024 0E94 0000 		call timer1SetPrescaler
+  45               	.LM4:
+  46 0028 80E0      		ldi r24,lo8(gs(servoService))
+  47 002a 90E0      		ldi r25,hi8(gs(servoService))
+  48 002c BC01      		movw r22,r24
+  49 002e 82E0      		ldi r24,lo8(2)
+  50 0030 0E94 0000 		call timerAttach
+  51               	.LM5:
+  52 0034 1B82      		std Y+3,__zero_reg__
+  53 0036 00C0      		rjmp .L2
+  54               	.L3:
+  55               	.LM6:
+  56 0038 8B81      		ldd r24,Y+3
+  57 003a 882F      		mov r24,r24
+  58 003c 90E0      		ldi r25,lo8(0)
+  59 003e 880F      		lsl r24
+  60 0040 991F      		rol r25
+  61 0042 880F      		lsl r24
+  62 0044 991F      		rol r25
+  63 0046 FC01      		movw r30,r24
+  64 0048 E050      		subi r30,lo8(-(ServoChannels+2))
+  65 004a F040      		sbci r31,hi8(-(ServoChannels+2))
+  66 004c 82E2      		ldi r24,lo8(34)
+  67 004e 90E0      		ldi r25,hi8(34)
+  68 0050 9183      		std Z+1,r25
+  69 0052 8083      		st Z,r24
+  70               	.LM7:
+  71 0054 8B81      		ldd r24,Y+3
+  72 0056 882F      		mov r24,r24
+  73 0058 90E0      		ldi r25,lo8(0)
+  74 005a 880F      		lsl r24
+  75 005c 991F      		rol r25
+  76 005e 880F      		lsl r24
+  77 0060 991F      		rol r25
+  78 0062 FC01      		movw r30,r24
+  79 0064 E050      		subi r30,lo8(-(ServoChannels))
+  80 0066 F040      		sbci r31,hi8(-(ServoChannels))
+  81 0068 85E0      		ldi r24,lo8(5)
+  82 006a 8083      		st Z,r24
+  83               	.LM8:
+  84 006c 8B81      		ldd r24,Y+3
+  85 006e 482F      		mov r20,r24
+  86 0070 50E0      		ldi r21,lo8(0)
+  87 0072 8B81      		ldd r24,Y+3
+  88 0074 282F      		mov r18,r24
+  89 0076 30E0      		ldi r19,lo8(0)
+  90 0078 81E0      		ldi r24,lo8(1)
+  91 007a 90E0      		ldi r25,hi8(1)
+  92 007c 00C0      		rjmp 2f
+  93 007e 880F      	1:	lsl r24
+  94 0080 991F      		rol r25
+  95 0082 2A95      	2:	dec r18
+  96 0084 02F4      		brpl 1b
+  97 0086 282F      		mov r18,r24
+  98 0088 CA01      		movw r24,r20
+  99 008a 880F      		lsl r24
+ 100 008c 991F      		rol r25
+ 101 008e 880F      		lsl r24
+ 102 0090 991F      		rol r25
+ 103 0092 FC01      		movw r30,r24
+ 104 0094 E050      		subi r30,lo8(-(ServoChannels+1))
+ 105 0096 F040      		sbci r31,hi8(-(ServoChannels+1))
+ 106 0098 2083      		st Z,r18
+ 107               	.LM9:
+ 108 009a 8B81      		ldd r24,Y+3
+ 109 009c 8F5F      		subi r24,lo8(-(1))
+ 110 009e 8B83      		std Y+3,r24
+ 111               	.L2:
+ 112 00a0 8B81      		ldd r24,Y+3
+ 113 00a2 8430      		cpi r24,lo8(4)
+ 114 00a4 00F0      		brlo .L3
+ 115               	.LM10:
+ 116 00a6 1092 0000 		sts (ServoPosTics)+1,__zero_reg__
+ 117 00aa 1092 0000 		sts ServoPosTics,__zero_reg__
+ 118               	.LM11:
+ 119 00ae 8AED      		ldi r24,lo8(1242)
+ 120 00b0 94E0      		ldi r25,hi8(1242)
+ 121 00b2 9093 0000 		sts (ServoPeriodTics)+1,r25
+ 122 00b6 8093 0000 		sts ServoPeriodTics,r24
+ 123               	.LM12:
+ 124 00ba E8E8      		ldi r30,lo8(136)
+ 125 00bc F0E0      		ldi r31,hi8(136)
+ 126 00be 8081      		ld r24,Z
+ 127 00c0 882F      		mov r24,r24
+ 128 00c2 90E0      		ldi r25,lo8(0)
+ 129 00c4 9A83      		std Y+2,r25
+ 130 00c6 8983      		std Y+1,r24
+ 131               	.LM13:
+ 132 00c8 E9E8      		ldi r30,lo8(137)
+ 133 00ca F0E0      		ldi r31,hi8(137)
+ 134 00cc 8081      		ld r24,Z
+ 135 00ce 882F      		mov r24,r24
+ 136 00d0 90E0      		ldi r25,lo8(0)
+ 137 00d2 982F      		mov r25,r24
+ 138 00d4 8827      		clr r24
+ 139 00d6 9C01      		movw r18,r24
+ 140 00d8 8981      		ldd r24,Y+1
+ 141 00da 9A81      		ldd r25,Y+2
+ 142 00dc 820F      		add r24,r18
+ 143 00de 931F      		adc r25,r19
+ 144 00e0 9A83      		std Y+2,r25
+ 145 00e2 8983      		std Y+1,r24
+ 146               	.LM14:
+ 147 00e4 2091 0000 		lds r18,ServoPeriodTics
+ 148 00e8 3091 0000 		lds r19,(ServoPeriodTics)+1
+ 149 00ec 8981      		ldd r24,Y+1
+ 150 00ee 9A81      		ldd r25,Y+2
+ 151 00f0 820F      		add r24,r18
+ 152 00f2 931F      		adc r25,r19
+ 153 00f4 9A83      		std Y+2,r25
+ 154 00f6 8983      		std Y+1,r24
+ 155               	.LM15:
+ 156 00f8 E9E8      		ldi r30,lo8(137)
+ 157 00fa F0E0      		ldi r31,hi8(137)
+ 158 00fc 8981      		ldd r24,Y+1
+ 159 00fe 9A81      		ldd r25,Y+2
+ 160 0100 892F      		mov r24,r25
+ 161 0102 9927      		clr r25
+ 162 0104 8083      		st Z,r24
+ 163               	.LM16:
+ 164 0106 E8E8      		ldi r30,lo8(136)
+ 165 0108 F0E0      		ldi r31,hi8(136)
+ 166 010a 8981      		ldd r24,Y+1
+ 167 010c 8083      		st Z,r24
+ 168               	.LM17:
+ 169 010e AFE6      		ldi r26,lo8(111)
+ 170 0110 B0E0      		ldi r27,hi8(111)
+ 171 0112 EFE6      		ldi r30,lo8(111)
+ 172 0114 F0E0      		ldi r31,hi8(111)
+ 173 0116 8081      		ld r24,Z
+ 174 0118 8260      		ori r24,lo8(2)
+ 175 011a 8C93      		st X,r24
+ 176               	/* epilogue: frame size=3 */
+ 177 011c 2396      		adiw r28,3
+ 178 011e 0FB6      		in __tmp_reg__,__SREG__
+ 179 0120 F894      		cli
+ 180 0122 DEBF      		out __SP_H__,r29
+ 181 0124 0FBE      		out __SREG__,__tmp_reg__
+ 182 0126 CDBF      		out __SP_L__,r28
+ 183 0128 DF91      		pop r29
+ 184 012a CF91      		pop r28
+ 185 012c 0895      		ret
+ 186               	/* epilogue end (size=9) */
+ 187               	/* function servoInit size 152 (133) */
+ 188               	.LFE2:
+ 190               	.global	servoOff
+ 192               	servoOff:
+ 193               	.LFB3:
+ 194               	.LM18:
+ 195               	/* prologue: frame size=0 */
+ 196 012e CF93      		push r28
+ 197 0130 DF93      		push r29
+ 198 0132 CDB7      		in r28,__SP_L__
+ 199 0134 DEB7      		in r29,__SP_H__
+ 200               	/* prologue end (size=4) */
+ 201               	.LM19:
+ 202 0136 AFE6      		ldi r26,lo8(111)
+ 203 0138 B0E0      		ldi r27,hi8(111)
+ 204 013a EFE6      		ldi r30,lo8(111)
+ 205 013c F0E0      		ldi r31,hi8(111)
+ 206 013e 8081      		ld r24,Z
+ 207 0140 8D7F      		andi r24,lo8(-3)
+ 208 0142 8C93      		st X,r24
+ 209               	.LM20:
+ 210 0144 82E0      		ldi r24,lo8(2)
+ 211 0146 0E94 0000 		call timerDetach
+ 212               	/* epilogue: frame size=0 */
+ 213 014a DF91      		pop r29
+ 214 014c CF91      		pop r28
+ 215 014e 0895      		ret
+ 216               	/* epilogue end (size=3) */
+ 217               	/* function servoOff size 17 (10) */
+ 218               	.LFE3:
+ 220               	.global	servoSetChannelIO
+ 222               	servoSetChannelIO:
+ 223               	.LFB4:
+ 224               	.LM21:
+ 225               	/* prologue: frame size=3 */
+ 226 0150 CF93      		push r28
+ 227 0152 DF93      		push r29
+ 228 0154 CDB7      		in r28,__SP_L__
+ 229 0156 DEB7      		in r29,__SP_H__
+ 230 0158 2397      		sbiw r28,3
+ 231 015a 0FB6      		in __tmp_reg__,__SREG__
+ 232 015c F894      		cli
+ 233 015e DEBF      		out __SP_H__,r29
+ 234 0160 0FBE      		out __SREG__,__tmp_reg__
+ 235 0162 CDBF      		out __SP_L__,r28
+ 236               	/* prologue end (size=10) */
+ 237 0164 8983      		std Y+1,r24
+ 238 0166 6A83      		std Y+2,r22
+ 239 0168 4B83      		std Y+3,r20
+ 240               	.LM22:
+ 241 016a 8981      		ldd r24,Y+1
+ 242 016c 882F      		mov r24,r24
+ 243 016e 90E0      		ldi r25,lo8(0)
+ 244 0170 880F      		lsl r24
+ 245 0172 991F      		rol r25
+ 246 0174 880F      		lsl r24
+ 247 0176 991F      		rol r25
+ 248 0178 FC01      		movw r30,r24
+ 249 017a E050      		subi r30,lo8(-(ServoChannels))
+ 250 017c F040      		sbci r31,hi8(-(ServoChannels))
+ 251 017e 8A81      		ldd r24,Y+2
+ 252 0180 8083      		st Z,r24
+ 253               	.LM23:
+ 254 0182 8981      		ldd r24,Y+1
+ 255 0184 482F      		mov r20,r24
+ 256 0186 50E0      		ldi r21,lo8(0)
+ 257 0188 8B81      		ldd r24,Y+3
+ 258 018a 882F      		mov r24,r24
+ 259 018c 90E0      		ldi r25,lo8(0)
+ 260 018e 9C01      		movw r18,r24
+ 261 0190 2770      		andi r18,lo8(7)
+ 262 0192 3070      		andi r19,hi8(7)
+ 263 0194 81E0      		ldi r24,lo8(1)
+ 264 0196 90E0      		ldi r25,hi8(1)
+ 265 0198 00C0      		rjmp 2f
+ 266 019a 880F      	1:	lsl r24
+ 267 019c 991F      		rol r25
+ 268 019e 2A95      	2:	dec r18
+ 269 01a0 02F4      		brpl 1b
+ 270 01a2 282F      		mov r18,r24
+ 271 01a4 CA01      		movw r24,r20
+ 272 01a6 880F      		lsl r24
+ 273 01a8 991F      		rol r25
+ 274 01aa 880F      		lsl r24
+ 275 01ac 991F      		rol r25
+ 276 01ae FC01      		movw r30,r24
+ 277 01b0 E050      		subi r30,lo8(-(ServoChannels+1))
+ 278 01b2 F040      		sbci r31,hi8(-(ServoChannels+1))
+ 279 01b4 2083      		st Z,r18
+ 280               	/* epilogue: frame size=3 */
+ 281 01b6 2396      		adiw r28,3
+ 282 01b8 0FB6      		in __tmp_reg__,__SREG__
+ 283 01ba F894      		cli
+ 284 01bc DEBF      		out __SP_H__,r29
+ 285 01be 0FBE      		out __SREG__,__tmp_reg__
+ 286 01c0 CDBF      		out __SP_L__,r28
+ 287 01c2 DF91      		pop r29
+ 288 01c4 CF91      		pop r28
+ 289 01c6 0895      		ret
+ 290               	/* epilogue end (size=9) */
+ 291               	/* function servoSetChannelIO size 61 (42) */
+ 292               	.LFE4:
+ 294               	.global	servoSetPosition
+ 296               	servoSetPosition:
+ 297               	.LFB5:
+ 298               	.LM24:
+ 299               	/* prologue: frame size=4 */
+ 300 01c8 CF93      		push r28
+ 301 01ca DF93      		push r29
+ 302 01cc CDB7      		in r28,__SP_L__
+ 303 01ce DEB7      		in r29,__SP_H__
+ 304 01d0 2497      		sbiw r28,4
+ 305 01d2 0FB6      		in __tmp_reg__,__SREG__
+ 306 01d4 F894      		cli
+ 307 01d6 DEBF      		out __SP_H__,r29
+ 308 01d8 0FBE      		out __SREG__,__tmp_reg__
+ 309 01da CDBF      		out __SP_L__,r28
+ 310               	/* prologue end (size=10) */
+ 311 01dc 8B83      		std Y+3,r24
+ 312 01de 6C83      		std Y+4,r22
+ 313               	.LM25:
+ 314 01e0 8C81      		ldd r24,Y+4
+ 315 01e2 282F      		mov r18,r24
+ 316 01e4 30E0      		ldi r19,lo8(0)
+ 317 01e6 88E6      		ldi r24,lo8(104)
+ 318 01e8 90E0      		ldi r25,hi8(104)
+ 319 01ea AC01      		movw r20,r24
+ 320 01ec 249F      		mul r18,r20
+ 321 01ee C001      		movw r24,r0
+ 322 01f0 259F      		mul r18,r21
+ 323 01f2 900D      		add r25,r0
+ 324 01f4 349F      		mul r19,r20
+ 325 01f6 900D      		add r25,r0
+ 326 01f8 1124      		clr r1
+ 327 01fa 2FEF      		ldi r18,lo8(255)
+ 328 01fc 30E0      		ldi r19,hi8(255)
+ 329 01fe B901      		movw r22,r18
+ 330 0200 0E94 0000 		call __udivmodhi4
+ 331 0204 CB01      		movw r24,r22
+ 332 0206 8296      		adiw r24,34
+ 333 0208 9A83      		std Y+2,r25
+ 334 020a 8983      		std Y+1,r24
+ 335               	.LM26:
+ 336 020c 8981      		ldd r24,Y+1
+ 337 020e 9A81      		ldd r25,Y+2
+ 338 0210 BC01      		movw r22,r24
+ 339 0212 8B81      		ldd r24,Y+3
+ 340 0214 0E94 0000 		call servoSetPositionRaw
+ 341               	/* epilogue: frame size=4 */
+ 342 0218 2496      		adiw r28,4
+ 343 021a 0FB6      		in __tmp_reg__,__SREG__
+ 344 021c F894      		cli
+ 345 021e DEBF      		out __SP_H__,r29
+ 346 0220 0FBE      		out __SREG__,__tmp_reg__
+ 347 0222 CDBF      		out __SP_L__,r28
+ 348 0224 DF91      		pop r29
+ 349 0226 CF91      		pop r28
+ 350 0228 0895      		ret
+ 351               	/* epilogue end (size=9) */
+ 352               	/* function servoSetPosition size 49 (30) */
+ 353               	.LFE5:
+ 355               	.global	servoGetPosition
+ 357               	servoGetPosition:
+ 358               	.LFB6:
+ 359               	.LM27:
+ 360               	/* prologue: frame size=1 */
+ 361 022a CF93      		push r28
+ 362 022c DF93      		push r29
+ 363 022e CDB7      		in r28,__SP_L__
+ 364 0230 DEB7      		in r29,__SP_H__
+ 365 0232 2197      		sbiw r28,1
+ 366 0234 0FB6      		in __tmp_reg__,__SREG__
+ 367 0236 F894      		cli
+ 368 0238 DEBF      		out __SP_H__,r29
+ 369 023a 0FBE      		out __SREG__,__tmp_reg__
+ 370 023c CDBF      		out __SP_L__,r28
+ 371               	/* prologue end (size=10) */
+ 372 023e 8983      		std Y+1,r24
+ 373               	.LM28:
+ 374 0240 8981      		ldd r24,Y+1
+ 375 0242 0E94 0000 		call servoGetPositionRaw
+ 376 0246 AC01      		movw r20,r24
+ 377 0248 CA01      		movw r24,r20
+ 378 024a 9C01      		movw r18,r24
+ 379 024c 220F      		lsl r18
+ 380 024e 331F      		rol r19
+ 381 0250 C901      		movw r24,r18
+ 382 0252 9695      		lsr r25
+ 383 0254 982F      		mov r25,r24
+ 384 0256 8827      		clr r24
+ 385 0258 9795      		ror r25
+ 386 025a 8795      		ror r24
+ 387 025c 821B      		sub r24,r18
+ 388 025e 930B      		sbc r25,r19
+ 389 0260 840F      		add r24,r20
+ 390 0262 951F      		adc r25,r21
+ 391 0264 8E5D      		subi r24,lo8(-(-8670))
+ 392 0266 9142      		sbci r25,hi8(-(-8670))
+ 393 0268 28E6      		ldi r18,lo8(104)
+ 394 026a 30E0      		ldi r19,hi8(104)
+ 395 026c B901      		movw r22,r18
+ 396 026e 0E94 0000 		call __udivmodhi4
+ 397 0272 CB01      		movw r24,r22
+ 398 0274 882F      		mov r24,r24
+ 399 0276 90E0      		ldi r25,lo8(0)
+ 400               	/* epilogue: frame size=1 */
+ 401 0278 2196      		adiw r28,1
+ 402 027a 0FB6      		in __tmp_reg__,__SREG__
+ 403 027c F894      		cli
+ 404 027e DEBF      		out __SP_H__,r29
+ 405 0280 0FBE      		out __SREG__,__tmp_reg__
+ 406 0282 CDBF      		out __SP_L__,r28
+ 407 0284 DF91      		pop r29
+ 408 0286 CF91      		pop r28
+ 409 0288 0895      		ret
+ 410               	/* epilogue end (size=9) */
+ 411               	/* function servoGetPosition size 48 (29) */
+ 412               	.LFE6:
+ 414               	.global	servoSetPositionRaw
+ 416               	servoSetPositionRaw:
+ 417               	.LFB7:
+ 418               	.LM29:
+ 419               	/* prologue: frame size=7 */
+ 420 028a CF93      		push r28
+ 421 028c DF93      		push r29
+ 422 028e CDB7      		in r28,__SP_L__
+ 423 0290 DEB7      		in r29,__SP_H__
+ 424 0292 2797      		sbiw r28,7
+ 425 0294 0FB6      		in __tmp_reg__,__SREG__
+ 426 0296 F894      		cli
+ 427 0298 DEBF      		out __SP_H__,r29
+ 428 029a 0FBE      		out __SREG__,__tmp_reg__
+ 429 029c CDBF      		out __SP_L__,r28
+ 430               	/* prologue end (size=10) */
+ 431 029e 8983      		std Y+1,r24
+ 432 02a0 7B83      		std Y+3,r23
+ 433 02a2 6A83      		std Y+2,r22
+ 434               	.LM30:
+ 435 02a4 8A81      		ldd r24,Y+2
+ 436 02a6 9B81      		ldd r25,Y+3
+ 437 02a8 9D83      		std Y+5,r25
+ 438 02aa 8C83      		std Y+4,r24
+ 439 02ac 8C81      		ldd r24,Y+4
+ 440 02ae 9D81      		ldd r25,Y+5
+ 441 02b0 8232      		cpi r24,34
+ 442 02b2 9105      		cpc r25,__zero_reg__
+ 443 02b4 00F4      		brsh .L15
+ 444               	.LM31:
+ 445 02b6 82E2      		ldi r24,lo8(34)
+ 446 02b8 90E0      		ldi r25,hi8(34)
+ 447 02ba 9D83      		std Y+5,r25
+ 448 02bc 8C83      		std Y+4,r24
+ 449               	.L15:
+ 450 02be 8C81      		ldd r24,Y+4
+ 451 02c0 9D81      		ldd r25,Y+5
+ 452 02c2 9B83      		std Y+3,r25
+ 453 02c4 8A83      		std Y+2,r24
+ 454               	.LM32:
+ 455 02c6 8A81      		ldd r24,Y+2
+ 456 02c8 9B81      		ldd r25,Y+3
+ 457 02ca 9F83      		std Y+7,r25
+ 458 02cc 8E83      		std Y+6,r24
+ 459 02ce 8E81      		ldd r24,Y+6
+ 460 02d0 9F81      		ldd r25,Y+7
+ 461 02d2 8B38      		cpi r24,139
+ 462 02d4 9105      		cpc r25,__zero_reg__
+ 463 02d6 00F0      		brlo .L16
+ 464 02d8 8AE8      		ldi r24,lo8(138)
+ 465 02da 90E0      		ldi r25,hi8(138)
+ 466 02dc 9F83      		std Y+7,r25
+ 467 02de 8E83      		std Y+6,r24
+ 468               	.L16:
+ 469 02e0 8E81      		ldd r24,Y+6
+ 470 02e2 9F81      		ldd r25,Y+7
+ 471 02e4 9B83      		std Y+3,r25
+ 472 02e6 8A83      		std Y+2,r24
+ 473               	.LM33:
+ 474 02e8 8981      		ldd r24,Y+1
+ 475 02ea 882F      		mov r24,r24
+ 476 02ec 90E0      		ldi r25,lo8(0)
+ 477 02ee 880F      		lsl r24
+ 478 02f0 991F      		rol r25
+ 479 02f2 880F      		lsl r24
+ 480 02f4 991F      		rol r25
+ 481 02f6 FC01      		movw r30,r24
+ 482 02f8 E050      		subi r30,lo8(-(ServoChannels+2))
+ 483 02fa F040      		sbci r31,hi8(-(ServoChannels+2))
+ 484 02fc 8A81      		ldd r24,Y+2
+ 485 02fe 9B81      		ldd r25,Y+3
+ 486 0300 9183      		std Z+1,r25
+ 487 0302 8083      		st Z,r24
+ 488               	/* epilogue: frame size=7 */
+ 489 0304 2796      		adiw r28,7
+ 490 0306 0FB6      		in __tmp_reg__,__SREG__
+ 491 0308 F894      		cli
+ 492 030a DEBF      		out __SP_H__,r29
+ 493 030c 0FBE      		out __SREG__,__tmp_reg__
+ 494 030e CDBF      		out __SP_L__,r28
+ 495 0310 DF91      		pop r29
+ 496 0312 CF91      		pop r28
+ 497 0314 0895      		ret
+ 498               	/* epilogue end (size=9) */
+ 499               	/* function servoSetPositionRaw size 70 (51) */
+ 500               	.LFE7:
+ 502               	.global	servoGetPositionRaw
+ 504               	servoGetPositionRaw:
+ 505               	.LFB8:
+ 506               	.LM34:
+ 507               	/* prologue: frame size=1 */
+ 508 0316 CF93      		push r28
+ 509 0318 DF93      		push r29
+ 510 031a CDB7      		in r28,__SP_L__
+ 511 031c DEB7      		in r29,__SP_H__
+ 512 031e 2197      		sbiw r28,1
+ 513 0320 0FB6      		in __tmp_reg__,__SREG__
+ 514 0322 F894      		cli
+ 515 0324 DEBF      		out __SP_H__,r29
+ 516 0326 0FBE      		out __SREG__,__tmp_reg__
+ 517 0328 CDBF      		out __SP_L__,r28
+ 518               	/* prologue end (size=10) */
+ 519 032a 8983      		std Y+1,r24
+ 520               	.LM35:
+ 521 032c 8981      		ldd r24,Y+1
+ 522 032e 882F      		mov r24,r24
+ 523 0330 90E0      		ldi r25,lo8(0)
+ 524 0332 880F      		lsl r24
+ 525 0334 991F      		rol r25
+ 526 0336 880F      		lsl r24
+ 527 0338 991F      		rol r25
+ 528 033a FC01      		movw r30,r24
+ 529 033c E050      		subi r30,lo8(-(ServoChannels+2))
+ 530 033e F040      		sbci r31,hi8(-(ServoChannels+2))
+ 531 0340 8081      		ld r24,Z
+ 532 0342 9181      		ldd r25,Z+1
+ 533               	/* epilogue: frame size=1 */
+ 534 0344 2196      		adiw r28,1
+ 535 0346 0FB6      		in __tmp_reg__,__SREG__
+ 536 0348 F894      		cli
+ 537 034a DEBF      		out __SP_H__,r29
+ 538 034c 0FBE      		out __SREG__,__tmp_reg__
+ 539 034e CDBF      		out __SP_L__,r28
+ 540 0350 DF91      		pop r29
+ 541 0352 CF91      		pop r28
+ 542 0354 0895      		ret
+ 543               	/* epilogue end (size=9) */
+ 544               	/* function servoGetPositionRaw size 32 (13) */
+ 545               	.LFE8:
+ 547               	.global	servoService
+ 549               	servoService:
+ 550               	.LFB9:
+ 551               	.LM36:
+ 552               	/* prologue: frame size=4 */
+ 553 0356 CF93      		push r28
+ 554 0358 DF93      		push r29
+ 555 035a CDB7      		in r28,__SP_L__
+ 556 035c DEB7      		in r29,__SP_H__
+ 557 035e 2497      		sbiw r28,4
+ 558 0360 0FB6      		in __tmp_reg__,__SREG__
+ 559 0362 F894      		cli
+ 560 0364 DEBF      		out __SP_H__,r29
+ 561 0366 0FBE      		out __SREG__,__tmp_reg__
+ 562 0368 CDBF      		out __SP_L__,r28
+ 563               	/* prologue end (size=10) */
+ 564               	.LM37:
+ 565 036a 8091 0000 		lds r24,ServoChannel
+ 566 036e 8430      		cpi r24,lo8(4)
+ 567 0370 00F4      		brsh .L21
+ 568               	.LM38:
+ 569 0372 8091 0000 		lds r24,ServoChannel
+ 570 0376 882F      		mov r24,r24
+ 571 0378 90E0      		ldi r25,lo8(0)
+ 572 037a 880F      		lsl r24
+ 573 037c 991F      		rol r25
+ 574 037e 880F      		lsl r24
+ 575 0380 991F      		rol r25
+ 576 0382 FC01      		movw r30,r24
+ 577 0384 E050      		subi r30,lo8(-(ServoChannels))
+ 578 0386 F040      		sbci r31,hi8(-(ServoChannels))
+ 579 0388 8081      		ld r24,Z
+ 580 038a 882F      		mov r24,r24
+ 581 038c 90E0      		ldi r25,lo8(0)
+ 582 038e 8096      		adiw r24,32
+ 583 0390 DC01      		movw r26,r24
+ 584 0392 8091 0000 		lds r24,ServoChannel
+ 585 0396 882F      		mov r24,r24
+ 586 0398 90E0      		ldi r25,lo8(0)
+ 587 039a 880F      		lsl r24
+ 588 039c 991F      		rol r25
+ 589 039e 880F      		lsl r24
+ 590 03a0 991F      		rol r25
+ 591 03a2 FC01      		movw r30,r24
+ 592 03a4 E050      		subi r30,lo8(-(ServoChannels))
+ 593 03a6 F040      		sbci r31,hi8(-(ServoChannels))
+ 594 03a8 8081      		ld r24,Z
+ 595 03aa 882F      		mov r24,r24
+ 596 03ac 90E0      		ldi r25,lo8(0)
+ 597 03ae 8096      		adiw r24,32
+ 598 03b0 FC01      		movw r30,r24
+ 599 03b2 8081      		ld r24,Z
+ 600 03b4 282F      		mov r18,r24
+ 601 03b6 8091 0000 		lds r24,ServoChannel
+ 602 03ba 882F      		mov r24,r24
+ 603 03bc 90E0      		ldi r25,lo8(0)
+ 604 03be 880F      		lsl r24
+ 605 03c0 991F      		rol r25
+ 606 03c2 880F      		lsl r24
+ 607 03c4 991F      		rol r25
+ 608 03c6 FC01      		movw r30,r24
+ 609 03c8 E050      		subi r30,lo8(-(ServoChannels+1))
+ 610 03ca F040      		sbci r31,hi8(-(ServoChannels+1))
+ 611 03cc 8081      		ld r24,Z
+ 612 03ce 8095      		com r24
+ 613 03d0 8223      		and r24,r18
+ 614 03d2 8C93      		st X,r24
+ 615               	.L21:
+ 616               	.LM39:
+ 617 03d4 8091 0000 		lds r24,ServoChannel
+ 618 03d8 8F5F      		subi r24,lo8(-(1))
+ 619 03da 8093 0000 		sts ServoChannel,r24
+ 620               	.LM40:
+ 621 03de 8091 0000 		lds r24,ServoChannel
+ 622 03e2 8430      		cpi r24,lo8(4)
+ 623 03e4 01F4      		brne .+2
+ 624 03e6 00C0      		rjmp .L23
+ 625               	.LM41:
+ 626 03e8 8091 0000 		lds r24,ServoChannel
+ 627 03ec 8530      		cpi r24,lo8(5)
+ 628 03ee 00F0      		brlo .L25
+ 629 03f0 1092 0000 		sts ServoChannel,__zero_reg__
+ 630               	.L25:
+ 631               	.LM42:
+ 632 03f4 8091 0000 		lds r24,ServoChannel
+ 633 03f8 882F      		mov r24,r24
+ 634 03fa 90E0      		ldi r25,lo8(0)
+ 635 03fc 880F      		lsl r24
+ 636 03fe 991F      		rol r25
+ 637 0400 880F      		lsl r24
+ 638 0402 991F      		rol r25
+ 639 0404 FC01      		movw r30,r24
+ 640 0406 E050      		subi r30,lo8(-(ServoChannels))
+ 641 0408 F040      		sbci r31,hi8(-(ServoChannels))
+ 642 040a 8081      		ld r24,Z
+ 643 040c 882F      		mov r24,r24
+ 644 040e 90E0      		ldi r25,lo8(0)
+ 645 0410 8096      		adiw r24,32
+ 646 0412 DC01      		movw r26,r24
+ 647 0414 8091 0000 		lds r24,ServoChannel
+ 648 0418 882F      		mov r24,r24
+ 649 041a 90E0      		ldi r25,lo8(0)
+ 650 041c 880F      		lsl r24
+ 651 041e 991F      		rol r25
+ 652 0420 880F      		lsl r24
+ 653 0422 991F      		rol r25
+ 654 0424 FC01      		movw r30,r24
+ 655 0426 E050      		subi r30,lo8(-(ServoChannels))
+ 656 0428 F040      		sbci r31,hi8(-(ServoChannels))
+ 657 042a 8081      		ld r24,Z
+ 658 042c 882F      		mov r24,r24
+ 659 042e 90E0      		ldi r25,lo8(0)
+ 660 0430 8096      		adiw r24,32
+ 661 0432 FC01      		movw r30,r24
+ 662 0434 2081      		ld r18,Z
+ 663 0436 8091 0000 		lds r24,ServoChannel
+ 664 043a 882F      		mov r24,r24
+ 665 043c 90E0      		ldi r25,lo8(0)
+ 666 043e 880F      		lsl r24
+ 667 0440 991F      		rol r25
+ 668 0442 880F      		lsl r24
+ 669 0444 991F      		rol r25
+ 670 0446 FC01      		movw r30,r24
+ 671 0448 E050      		subi r30,lo8(-(ServoChannels+1))
+ 672 044a F040      		sbci r31,hi8(-(ServoChannels+1))
+ 673 044c 8081      		ld r24,Z
+ 674 044e 822B      		or r24,r18
+ 675 0450 8C93      		st X,r24
+ 676               	.LM43:
+ 677 0452 8091 0000 		lds r24,ServoChannel
+ 678 0456 882F      		mov r24,r24
+ 679 0458 90E0      		ldi r25,lo8(0)
+ 680 045a 880F      		lsl r24
+ 681 045c 991F      		rol r25
+ 682 045e 880F      		lsl r24
+ 683 0460 991F      		rol r25
+ 684 0462 FC01      		movw r30,r24
+ 685 0464 E050      		subi r30,lo8(-(ServoChannels+2))
+ 686 0466 F040      		sbci r31,hi8(-(ServoChannels+2))
+ 687 0468 8081      		ld r24,Z
+ 688 046a 9181      		ldd r25,Z+1
+ 689 046c 9C83      		std Y+4,r25
+ 690 046e 8B83      		std Y+3,r24
+ 691 0470 00C0      		rjmp .L27
+ 692               	.L23:
+ 693               	.LM44:
+ 694 0472 8091 0000 		lds r24,ServoPeriodTics
+ 695 0476 9091 0000 		lds r25,(ServoPeriodTics)+1
+ 696 047a 2091 0000 		lds r18,ServoPosTics
+ 697 047e 3091 0000 		lds r19,(ServoPosTics)+1
+ 698 0482 821B      		sub r24,r18
+ 699 0484 930B      		sbc r25,r19
+ 700 0486 9C83      		std Y+4,r25
+ 701 0488 8B83      		std Y+3,r24
+ 702               	.L27:
+ 703               	.LM45:
+ 704 048a E8E8      		ldi r30,lo8(136)
+ 705 048c F0E0      		ldi r31,hi8(136)
+ 706 048e 8081      		ld r24,Z
+ 707 0490 882F      		mov r24,r24
+ 708 0492 90E0      		ldi r25,lo8(0)
+ 709 0494 9A83      		std Y+2,r25
+ 710 0496 8983      		std Y+1,r24
+ 711               	.LM46:
+ 712 0498 E9E8      		ldi r30,lo8(137)
+ 713 049a F0E0      		ldi r31,hi8(137)
+ 714 049c 8081      		ld r24,Z
+ 715 049e 882F      		mov r24,r24
+ 716 04a0 90E0      		ldi r25,lo8(0)
+ 717 04a2 982F      		mov r25,r24
+ 718 04a4 8827      		clr r24
+ 719 04a6 9C01      		movw r18,r24
+ 720 04a8 8981      		ldd r24,Y+1
+ 721 04aa 9A81      		ldd r25,Y+2
+ 722 04ac 820F      		add r24,r18
+ 723 04ae 931F      		adc r25,r19
+ 724 04b0 9A83      		std Y+2,r25
+ 725 04b2 8983      		std Y+1,r24
+ 726               	.LM47:
+ 727 04b4 2981      		ldd r18,Y+1
+ 728 04b6 3A81      		ldd r19,Y+2
+ 729 04b8 8B81      		ldd r24,Y+3
+ 730 04ba 9C81      		ldd r25,Y+4
+ 731 04bc 820F      		add r24,r18
+ 732 04be 931F      		adc r25,r19
+ 733 04c0 9A83      		std Y+2,r25
+ 734 04c2 8983      		std Y+1,r24
+ 735               	.LM48:
+ 736 04c4 E9E8      		ldi r30,lo8(137)
+ 737 04c6 F0E0      		ldi r31,hi8(137)
+ 738 04c8 8981      		ldd r24,Y+1
+ 739 04ca 9A81      		ldd r25,Y+2
+ 740 04cc 892F      		mov r24,r25
+ 741 04ce 9927      		clr r25
+ 742 04d0 8083      		st Z,r24
+ 743               	.LM49:
+ 744 04d2 E8E8      		ldi r30,lo8(136)
+ 745 04d4 F0E0      		ldi r31,hi8(136)
+ 746 04d6 8981      		ldd r24,Y+1
+ 747 04d8 8083      		st Z,r24
+ 748               	.LM50:
+ 749 04da 2091 0000 		lds r18,ServoPosTics
+ 750 04de 3091 0000 		lds r19,(ServoPosTics)+1
+ 751 04e2 8B81      		ldd r24,Y+3
+ 752 04e4 9C81      		ldd r25,Y+4
+ 753 04e6 820F      		add r24,r18
+ 754 04e8 931F      		adc r25,r19
+ 755 04ea 9093 0000 		sts (ServoPosTics)+1,r25
+ 756 04ee 8093 0000 		sts ServoPosTics,r24
+ 757               	.LM51:
+ 758 04f2 2091 0000 		lds r18,ServoPosTics
+ 759 04f6 3091 0000 		lds r19,(ServoPosTics)+1
+ 760 04fa 8091 0000 		lds r24,ServoPeriodTics
+ 761 04fe 9091 0000 		lds r25,(ServoPeriodTics)+1
+ 762 0502 2817      		cp r18,r24
+ 763 0504 3907      		cpc r19,r25
+ 764 0506 00F0      		brlo .L30
+ 765 0508 1092 0000 		sts (ServoPosTics)+1,__zero_reg__
+ 766 050c 1092 0000 		sts ServoPosTics,__zero_reg__
+ 767               	.L30:
+ 768               	/* epilogue: frame size=4 */
+ 769 0510 2496      		adiw r28,4
+ 770 0512 0FB6      		in __tmp_reg__,__SREG__
+ 771 0514 F894      		cli
+ 772 0516 DEBF      		out __SP_H__,r29
+ 773 0518 0FBE      		out __SREG__,__tmp_reg__
+ 774 051a CDBF      		out __SP_L__,r28
+ 775 051c DF91      		pop r29
+ 776 051e CF91      		pop r28
+ 777 0520 0895      		ret
+ 778               	/* epilogue end (size=9) */
+ 779               	/* function servoService size 230 (211) */
+ 780               	.LFE9:
+ 782               		.comm ServoPosTics,2,1
+ 783               		.comm ServoPeriodTics,2,1
+ 784               		.comm ServoChannel,1,1
+ 785               		.comm ServoChannels,16,1
+ 866               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 servo.c
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:6      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:19     .text:00000000 servoInit
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:549    .text:00000356 servoService
+                            *COM*:00000010 ServoChannels
+                            *COM*:00000002 ServoPosTics
+                            *COM*:00000002 ServoPeriodTics
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:192    .text:0000012e servoOff
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:222    .text:00000150 servoSetChannelIO
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:296    .text:000001c8 servoSetPosition
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:416    .text:0000028a servoSetPositionRaw
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:357    .text:0000022a servoGetPosition
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccILgDll.s:504    .text:00000316 servoGetPositionRaw
+                            *COM*:00000001 ServoChannel
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+timer1SetPrescaler
+timerAttach
+timerDetach
+__udivmodhi4

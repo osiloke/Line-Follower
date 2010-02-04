@@ -1,0 +1,934 @@
+Archive member included because of file (symbol)
+
+c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_mulsi3.o)
+                              timerx8.o (__mulsi3)
+c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+                              rprintf.o (__udivmodhi4)
+c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodhi4.o)
+                              ocbot1.o (__divmodhi4)
+c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodsi4.o)
+                              rprintf.o (__udivmodsi4)
+c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodsi4.o)
+                              timerx8.o (__divmodsi4)
+c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+                              c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o (exit)
+c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+                              ocbot1.o (__do_copy_data)
+c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+                              ocbot1.o (__do_clear_bss)
+
+Allocating common symbols
+Common symbol       size              file
+
+uartReadyTx         0x1               uart.o
+ServoChannel        0x1               servo.o
+ServoChannels       0x10              servo.o
+j                   0x2               ocbot1.o
+x                   0x2               ocbot1.o
+sens_l              0x64              ocbot1.o
+ServoPosTics        0x2               servo.o
+w                   0x2               ocbot1.o
+Timer0Reg0          0x4               timerx8.o
+k                   0x2               ocbot1.o
+uartRxBuffer        0x8               uart.o
+TimerPauseReg       0x4               timerx8.o
+Timer2Reg0          0x4               timerx8.o
+ServoPeriodTics     0x2               servo.o
+i                   0x2               ocbot1.o
+uartBufferedTx      0x1               uart.o
+sens_arr            0x6               ocbot1.o
+sens_h              0x64              ocbot1.o
+firstcal            0x2               ocbot1.o
+a2dCompleteFlag     0x1               a2d.o
+uartTxBuffer        0x8               uart.o
+uartRxOverflow      0x2               uart.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+LOAD ocbot1.o
+LOAD a2d.o
+LOAD rprintf.o
+LOAD timerx8.o
+LOAD servo.o
+LOAD pulse.o
+LOAD uart.o
+LOAD buffer.o
+LOAD c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libm.a
+LOAD c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
+LOAD c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a
+LOAD c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x373e
+ *(.vectors)
+ .vectors       0x00000000       0x68 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+ .progmem.data  0x00000068       0xd4 ocbot1.o
+ .progmem.data  0x0000013c       0x11 rprintf.o
+ .progmem.data  0x0000014d       0x1c timerx8.o
+                0x00000159                TimerRTCPrescaleFactor
+                0x0000014d                TimerPrescaleFactor
+                0x0000016a                . = ALIGN (0x2)
+ *fill*         0x00000169        0x1 00
+                0x0000016a                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x0000016a        0x0 linker stubs
+ *(.trampolines*)
+                0x0000016a                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x0000016a                __ctors_start = .
+ *(.ctors)
+                0x0000016a                __ctors_end = .
+                0x0000016a                __dtors_start = .
+ *(.dtors)
+                0x0000016a                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x0000016a        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+                0x0000016a                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x0000016a        0xc c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000176       0x16 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+                0x00000176                __do_copy_data
+ .init4         0x0000018c       0x10 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+                0x0000018c                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x0000019c        0x8 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+ *(.init9)
+ *(.text)
+ .text          0x000001a4        0x4 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+                0x000001a4                __vector_22
+                0x000001a4                __vector_1
+                0x000001a4                __vector_24
+                0x000001a4                __bad_interrupt
+                0x000001a4                __vector_6
+                0x000001a4                __vector_3
+                0x000001a4                __vector_23
+                0x000001a4                __vector_25
+                0x000001a4                __vector_17
+                0x000001a4                __vector_19
+                0x000001a4                __vector_5
+                0x000001a4                __vector_4
+                0x000001a4                __vector_2
+                0x000001a4                __vector_15
+                0x000001a4                __vector_14
+ .text          0x000001a8      0xd08 ocbot1.o
+                0x0000072e                scan_3sensors
+                0x00000288                turn_on_led
+                0x00000470                initA2D
+                0x0000041a                delay_cycles
+                0x000005aa                turn_led
+                0x00000382                move_right
+                0x0000035c                move_left
+                0x000003f4                hold_position
+                0x000004f0                delay_inms
+                0x000002a4                turn_off_led
+                0x000002c0                servo_left
+                0x00000a4c                oc_caliberate
+                0x00000e50                read_left
+                0x000001a8                initialize_ports
+                0x0000030e                servo_right
+                0x000006b6                main
+                0x00000e70                read_right
+                0x00000964                scan_2sensors
+                0x00000d28                AverageLowHigh
+                0x0000048e                initUART
+                0x000003ce                move_reverse
+                0x00000e90                read_middle
+                0x000004b4                read_input8
+                0x000003a8                move_straight
+ .text          0x00000eb0      0x28a a2d.o
+                0x0000102e                a2dIsComplete
+                0x000010d6                a2dConvert8bit
+                0x00000f08                a2dOff
+                0x00000f34                a2dSetPrescaler
+                0x0000104a                a2dConvert10bit
+                0x00000eb0                a2dInit
+                0x00000f70                a2dSetReference
+                0x00001110                __vector_21
+                0x00000fc6                a2dSetChannel
+                0x00001004                a2dStartConvert
+ .text          0x0000113a      0x73a rprintf.o
+                0x0000169a                rprintf1RamRom
+                0x00001396                rprintfu08
+                0x0000140a                rprintfu32
+                0x000011b6                rprintfStr
+                0x0000120a                rprintfStrLen
+                0x000012dc                rprintfProgStr
+                0x000013ce                rprintfu16
+                0x0000113a                rprintfInit
+                0x00001170                rprintfChar
+                0x0000133a                rprintfCRLF
+                0x0000134e                rprintfu04
+                0x00001452                rprintfNum
+ .text          0x00001874      0xbae timerx8.o
+                0x00001dfc                timer2GetOverflowCount
+                0x00001bb0                timerDetach
+                0x000019f2                timer1SetPrescaler
+                0x0000228a                __vector_12
+                0x00001fea                timer1PWMBOff
+                0x00001b12                timer2GetPrescaler
+                0x00001934                timer0Init
+                0x00001fbe                timer1PWMAOff
+                0x0000204a                timer1PWMBSet
+                0x00002224                __vector_11
+                0x00001eba                timer1PWMInitICR
+                0x00002132                __vector_13
+                0x00001a6a                timer0GetPrescaler
+                0x00002356                __vector_7
+                0x00001dbc                timer0GetOverflowCount
+                0x000018ea                timerInit
+                0x00001a2e                timer2SetPrescaler
+                0x00001f6a                timer1PWMAOn
+                0x000019b6                timer0SetPrescaler
+                0x00001874                delay_us
+                0x00001d9e                timer0ClearOverflowCount
+                0x00002198                __vector_9
+                0x00001960                timer1Init
+                0x00001e1e                timer1PWMInit
+                0x00001f94                timer1PWMBOn
+                0x0000198a                timer2Init
+                0x000023bc                __vector_8
+                0x00002014                timer1PWMASet
+                0x00001b66                timerAttach
+                0x00001f38                timer1PWMOff
+                0x000022f0                __vector_10
+                0x00002080                __vector_16
+                0x00001abe                timer1GetPrescaler
+                0x00001dde                timer2ClearOverflowCount
+                0x00001bf2                timerPause
+ .text          0x00002422      0x522 servo.o
+                0x00002422                servoInit
+                0x00002550                servoOff
+                0x000025ea                servoSetPosition
+                0x00002738                servoGetPositionRaw
+                0x00002572                servoSetChannelIO
+                0x00002778                servoService
+                0x0000264c                servoGetPosition
+                0x000026ac                servoSetPositionRaw
+ .text          0x00002944      0x4b4 pulse.o
+                0x00002a96                pulseT1BSetFreq
+                0x000029b0                pulseT1Off
+                0x00002944                pulseInit
+                0x00002cb2                pulseT1ARemaining
+                0x00002a14                pulseT1ASetFreq
+                0x00002bc6                pulseT1BRun
+                0x00002cea                pulseT1AService
+                0x00002956                pulseT1Init
+                0x00002c92                pulseT1BStop
+                0x00002c72                pulseT1AStop
+                0x00002cce                pulseT1BRemaining
+                0x00002d72                pulseT1BService
+                0x00002b18                pulseT1ARun
+ .text          0x00002df8      0x46e uart.o
+                0x00003116                uartSendTxBuffer
+                0x00002f98                uartSendByte
+                0x00002e3a                uartInitBuffers
+                0x0000301e                uartReceiveByte
+                0x000030e0                uartAddToTxBuffer
+                0x00002e70                uartSetRxHandler
+                0x00003086                uartFlushReceiveBuffer
+                0x00002df8                uartInit
+                0x0000309c                uartReceiveBufferIsEmpty
+                0x00002ea6                uartSetBaudRate
+                0x00002f86                uartGetTxBuffer
+                0x00002fd4                uartGetByte
+                0x00002f74                uartGetRxBuffer
+                0x000031c6                __vector_18
+                0x00003136                __vector_20
+ .text          0x00003266      0x3d0 buffer.o
+                0x00003596                bufferIsNotFull
+                0x000032d2                bufferGetFromFront
+                0x0000345c                bufferGetAtIndex
+                0x00003396                bufferDumpFromFront
+                0x00003266                bufferInit
+                0x000034da                bufferAddToEnd
+                0x000035f2                bufferFlush
+ .text          0x00003636        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_mulsi3.o)
+ .text          0x00003636        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text          0x00003636        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodhi4.o)
+ .text          0x00003636        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodsi4.o)
+ .text          0x00003636        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodsi4.o)
+ .text          0x00003636        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .text          0x00003636        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .text          0x00003636        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+                0x00003636                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x00003636       0x3e c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_mulsi3.o)
+                0x00003636                __mulsi3
+ .text.libgcc   0x00003674       0x28 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+                0x00003674                __udivmodhi4
+ .text.libgcc   0x0000369c       0x26 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodhi4.o)
+                0x0000369c                __divmodhi4
+                0x0000369c                _div
+ .text.libgcc   0x000036c2       0x44 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodsi4.o)
+                0x000036c2                __udivmodsi4
+ .text.libgcc   0x00003706       0x36 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodsi4.o)
+                0x00003706                __divmodsi4
+ .text.libgcc   0x0000373c        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x0000373c        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000373c        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+                0x0000373c                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x0000373c        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+                0x0000373c                exit
+                0x0000373c                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x0000373c        0x2 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x0000373e                _etext = .
+
+.data           0x00800100        0x6 load address 0x0000373e
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800100        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+ .data          0x00800100        0x6 ocbot1.o
+                0x00800102                cal_count
+                0x00800100                n
+                0x00800104                f
+ .data          0x00800106        0x0 a2d.o
+ .data          0x00800106        0x0 rprintf.o
+ .data          0x00800106        0x0 timerx8.o
+ .data          0x00800106        0x0 servo.o
+ .data          0x00800106        0x0 pulse.o
+ .data          0x00800106        0x0 uart.o
+ .data          0x00800106        0x0 buffer.o
+ .data          0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_mulsi3.o)
+ .data          0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+ .data          0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodhi4.o)
+ .data          0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodsi4.o)
+ .data          0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodsi4.o)
+ .data          0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .data          0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .data          0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x00800106                . = ALIGN (0x2)
+                0x00800106                _edata = .
+                0x00800106                PROVIDE (__data_end, .)
+
+.bss            0x00800106      0x1bc load address 0x00003744
+                0x00800106                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x00800106        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+ .bss           0x00800106       0x10 ocbot1.o
+                0x00800106                LSENS_VAL
+                0x0080010c                SENS_THRESH
+                0x0080010e                sens_highest
+                0x00800112                average_low
+                0x00800114                average_high
+                0x00800110                sens_lowest
+                0x00800108                RSENS_VAL
+                0x0080010a                MSENS_VAL
+ .bss           0x00800116        0x0 a2d.o
+ .bss           0x00800116        0x2 rprintf.o
+ .bss           0x00800118        0xe timerx8.o
+ .bss           0x00800126        0x0 servo.o
+ .bss           0x00800126        0xa pulse.o
+ .bss           0x00800130       0x82 uart.o
+ .bss           0x008001b2        0x0 buffer.o
+ .bss           0x008001b2        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_mulsi3.o)
+ .bss           0x008001b2        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+ .bss           0x008001b2        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodhi4.o)
+ .bss           0x008001b2        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodsi4.o)
+ .bss           0x008001b2        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodsi4.o)
+ .bss           0x008001b2        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .bss           0x008001b2        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .bss           0x008001b2        0x0 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x008001b2       0xda ocbot1.o
+                0x008001b2                j
+                0x008001b4                x
+                0x008001b6                sens_l
+                0x0080021a                w
+                0x0080021c                k
+                0x0080021e                i
+                0x00800220                sens_arr
+                0x00800226                sens_h
+                0x0080028a                firstcal
+ COMMON         0x0080028c        0x1 a2d.o
+                0x0080028c                a2dCompleteFlag
+ COMMON         0x0080028d        0xc timerx8.o
+                0x0080028d                Timer0Reg0
+                0x00800291                TimerPauseReg
+                0x00800295                Timer2Reg0
+ COMMON         0x00800299       0x15 servo.o
+                0x00800299                ServoChannel
+                0x0080029a                ServoChannels
+                0x008002aa                ServoPosTics
+                0x008002ac                ServoPeriodTics
+ COMMON         0x008002ae       0x14 uart.o
+                0x008002ae                uartReadyTx
+                0x008002af                uartRxBuffer
+                0x008002b7                uartBufferedTx
+                0x008002b8                uartTxBuffer
+                0x008002c0                uartRxOverflow
+                0x008002c2                PROVIDE (__bss_end, .)
+                0x0000373e                __data_load_start = LOADADDR (.data)
+                0x00003744                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008002c2        0x0
+                0x008002c2                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008002c2                PROVIDE (__noinit_end, .)
+                0x008002c2                _end = .
+                0x008002c2                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab           0x00000000      0x378
+ *(.stab)
+ .stab          0x00000000      0x378 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+
+.stabstr        0x00000000       0x5f
+ *(.stabstr)
+ .stabstr       0x00000000       0x5f c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x100
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 ocbot1.o
+ .debug_aranges
+                0x00000020       0x20 a2d.o
+ .debug_aranges
+                0x00000040       0x20 rprintf.o
+ .debug_aranges
+                0x00000060       0x20 timerx8.o
+ .debug_aranges
+                0x00000080       0x20 servo.o
+ .debug_aranges
+                0x000000a0       0x20 pulse.o
+ .debug_aranges
+                0x000000c0       0x20 uart.o
+ .debug_aranges
+                0x000000e0       0x20 buffer.o
+
+.debug_pubnames
+                0x00000000      0xb42
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000      0x272 ocbot1.o
+ .debug_pubnames
+                0x00000272       0xd4 a2d.o
+ .debug_pubnames
+                0x00000346       0xd4 rprintf.o
+ .debug_pubnames
+                0x0000041a      0x305 timerx8.o
+ .debug_pubnames
+                0x0000071f       0xf6 servo.o
+ .debug_pubnames
+                0x00000815       0xfd pulse.o
+ .debug_pubnames
+                0x00000912      0x194 uart.o
+ .debug_pubnames
+                0x00000aa6       0x9c buffer.o
+
+.debug_info     0x00000000     0x2b52
+ *(.debug_info)
+ .debug_info    0x00000000      0x87e ocbot1.o
+ .debug_info    0x0000087e      0x2cd a2d.o
+ .debug_info    0x00000b4b      0x660 rprintf.o
+ .debug_info    0x000011ab      0x8a3 timerx8.o
+ .debug_info    0x00001a4e      0x408 servo.o
+ .debug_info    0x00001e56      0x3b9 pulse.o
+ .debug_info    0x0000220f      0x563 uart.o
+ .debug_info    0x00002772      0x3e0 buffer.o
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0x806
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x11b ocbot1.o
+ .debug_abbrev  0x0000011b       0xaf a2d.o
+ .debug_abbrev  0x000001ca      0x135 rprintf.o
+ .debug_abbrev  0x000002ff      0x169 timerx8.o
+ .debug_abbrev  0x00000468       0xf7 servo.o
+ .debug_abbrev  0x0000055f       0x9d pulse.o
+ .debug_abbrev  0x000005fc      0x136 uart.o
+ .debug_abbrev  0x00000732       0xd4 buffer.o
+
+.debug_line     0x00000000     0x194f
+ *(.debug_line)
+ .debug_line    0x00000000      0x675 ocbot1.o
+ .debug_line    0x00000675      0x16b a2d.o
+ .debug_line    0x000007e0      0x3cf rprintf.o
+ .debug_line    0x00000baf      0x4d2 timerx8.o
+ .debug_line    0x00001081      0x200 servo.o
+ .debug_line    0x00001281      0x295 pulse.o
+ .debug_line    0x00001516      0x250 uart.o
+ .debug_line    0x00001766      0x1e9 buffer.o
+
+.debug_frame    0x00000000      0x850
+ *(.debug_frame)
+ .debug_frame   0x00000000      0x1a0 ocbot1.o
+ .debug_frame   0x000001a0       0xb0 a2d.o
+ .debug_frame   0x00000250       0xd0 rprintf.o
+ .debug_frame   0x00000320      0x240 timerx8.o
+ .debug_frame   0x00000560       0x90 servo.o
+ .debug_frame   0x000005f0       0xe0 pulse.o
+ .debug_frame   0x000006d0      0x100 uart.o
+ .debug_frame   0x000007d0       0x80 buffer.o
+
+.debug_str      0x00000000       0x58
+ *(.debug_str)
+ .debug_str     0x00000000       0x12 rprintf.o
+ .debug_str     0x00000012       0x28 timerx8.o
+ .debug_str     0x0000003a       0x11 servo.o
+ .debug_str     0x0000004b        0xd buffer.o
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(ocbot1.elf elf32-avr)
+LOAD linker stubs
+
+Cross Reference Table
+
+Symbol                                            File
+AverageLowHigh                                    ocbot1.o
+LSENS_VAL                                         ocbot1.o
+MSENS_VAL                                         ocbot1.o
+RSENS_VAL                                         ocbot1.o
+SENS_THRESH                                       ocbot1.o
+ServoChannel                                      servo.o
+ServoChannels                                     servo.o
+ServoPeriodTics                                   servo.o
+ServoPosTics                                      servo.o
+Timer0Reg0                                        timerx8.o
+Timer2Reg0                                        timerx8.o
+TimerPauseReg                                     timerx8.o
+TimerPrescaleFactor                               timerx8.o
+TimerRTCPrescaleFactor                            timerx8.o
+__bad_interrupt                                   c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__bss_end                                         c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+__bss_start                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+__data_end                                        c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+__data_load_start                                 c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+__data_start                                      c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+__divmodhi4                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodhi4.o)
+                                                  ocbot1.o
+__divmodsi4                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodsi4.o)
+                                                  timerx8.o
+__do_clear_bss                                    c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+                                                  buffer.o
+                                                  uart.o
+                                                  pulse.o
+                                                  servo.o
+                                                  timerx8.o
+                                                  rprintf.o
+                                                  a2d.o
+                                                  ocbot1.o
+__do_copy_data                                    c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+                                                  buffer.o
+                                                  uart.o
+                                                  pulse.o
+                                                  servo.o
+                                                  timerx8.o
+                                                  rprintf.o
+                                                  a2d.o
+                                                  ocbot1.o
+__heap_end                                        c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__init                                            c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__mulsi3                                          c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_mulsi3.o)
+                                                  pulse.o
+                                                  timerx8.o
+__stack                                           c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__udivmodhi4                                      c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodhi4.o)
+                                                  buffer.o
+                                                  servo.o
+                                                  timerx8.o
+                                                  rprintf.o
+__udivmodsi4                                      c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodsi4.o)
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodsi4.o)
+                                                  uart.o
+                                                  pulse.o
+                                                  timerx8.o
+                                                  rprintf.o
+__vector_1                                        c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_10                                       timerx8.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_11                                       timerx8.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_12                                       timerx8.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_13                                       timerx8.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_14                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_15                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_16                                       timerx8.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_17                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_18                                       uart.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_19                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_2                                        c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_20                                       uart.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_21                                       a2d.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_22                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_23                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_24                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_25                                       c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_3                                        c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_4                                        c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_5                                        c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_6                                        c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_7                                        timerx8.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_8                                        timerx8.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_9                                        timerx8.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vector_default                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+__vectors                                         c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+_div                                              c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_divmodhi4.o)
+_exit                                             c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+a2dCompleteFlag                                   a2d.o
+a2dConvert10bit                                   a2d.o
+a2dConvert8bit                                    a2d.o
+                                                  ocbot1.o
+a2dInit                                           a2d.o
+                                                  ocbot1.o
+a2dIsComplete                                     a2d.o
+a2dOff                                            a2d.o
+a2dSetChannel                                     a2d.o
+a2dSetPrescaler                                   a2d.o
+                                                  ocbot1.o
+a2dSetReference                                   a2d.o
+                                                  ocbot1.o
+a2dStartConvert                                   a2d.o
+average_high                                      ocbot1.o
+average_low                                       ocbot1.o
+bufferAddToEnd                                    buffer.o
+                                                  uart.o
+bufferDumpFromFront                               buffer.o
+bufferFlush                                       buffer.o
+bufferGetAtIndex                                  buffer.o
+bufferGetFromFront                                buffer.o
+                                                  uart.o
+bufferInit                                        buffer.o
+                                                  uart.o
+bufferIsNotFull                                   buffer.o
+cal_count                                         ocbot1.o
+delay_cycles                                      ocbot1.o
+delay_inms                                        ocbot1.o
+delay_us                                          timerx8.o
+exit                                              c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+f                                                 ocbot1.o
+firstcal                                          ocbot1.o
+hold_position                                     ocbot1.o
+i                                                 ocbot1.o
+initA2D                                           ocbot1.o
+initUART                                          ocbot1.o
+initialize_ports                                  ocbot1.o
+j                                                 ocbot1.o
+k                                                 ocbot1.o
+main                                              ocbot1.o
+                                                  c:/ocinstalledwillbedeleted/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm168.o
+move_left                                         ocbot1.o
+move_reverse                                      ocbot1.o
+move_right                                        ocbot1.o
+move_straight                                     ocbot1.o
+n                                                 ocbot1.o
+oc_caliberate                                     ocbot1.o
+pulseInit                                         pulse.o
+pulseT1ARemaining                                 pulse.o
+pulseT1ARun                                       pulse.o
+pulseT1AService                                   pulse.o
+pulseT1ASetFreq                                   pulse.o
+pulseT1AStop                                      pulse.o
+pulseT1BRemaining                                 pulse.o
+pulseT1BRun                                       pulse.o
+pulseT1BService                                   pulse.o
+pulseT1BSetFreq                                   pulse.o
+pulseT1BStop                                      pulse.o
+pulseT1Init                                       pulse.o
+pulseT1Off                                        pulse.o
+read_input8                                       ocbot1.o
+read_left                                         ocbot1.o
+read_middle                                       ocbot1.o
+read_right                                        ocbot1.o
+rprintf1RamRom                                    rprintf.o
+                                                  ocbot1.o
+rprintfCRLF                                       rprintf.o
+rprintfChar                                       rprintf.o
+rprintfInit                                       rprintf.o
+                                                  ocbot1.o
+rprintfNum                                        rprintf.o
+rprintfProgStr                                    rprintf.o
+rprintfStr                                        rprintf.o
+rprintfStrLen                                     rprintf.o
+rprintfu04                                        rprintf.o
+rprintfu08                                        rprintf.o
+rprintfu16                                        rprintf.o
+rprintfu32                                        rprintf.o
+scan_2sensors                                     ocbot1.o
+scan_3sensors                                     ocbot1.o
+sens_arr                                          ocbot1.o
+sens_h                                            ocbot1.o
+sens_highest                                      ocbot1.o
+sens_l                                            ocbot1.o
+sens_lowest                                       ocbot1.o
+servoGetPosition                                  servo.o
+servoGetPositionRaw                               servo.o
+servoInit                                         servo.o
+                                                  ocbot1.o
+servoOff                                          servo.o
+servoService                                      servo.o
+servoSetChannelIO                                 servo.o
+servoSetPosition                                  servo.o
+                                                  ocbot1.o
+servoSetPositionRaw                               servo.o
+servo_left                                        ocbot1.o
+servo_right                                       ocbot1.o
+timer0ClearOverflowCount                          timerx8.o
+timer0GetOverflowCount                            timerx8.o
+timer0GetPrescaler                                timerx8.o
+timer0Init                                        timerx8.o
+timer0SetPrescaler                                timerx8.o
+timer1GetPrescaler                                timerx8.o
+                                                  pulse.o
+timer1Init                                        timerx8.o
+timer1PWMAOff                                     timerx8.o
+timer1PWMAOn                                      timerx8.o
+timer1PWMASet                                     timerx8.o
+timer1PWMBOff                                     timerx8.o
+timer1PWMBOn                                      timerx8.o
+timer1PWMBSet                                     timerx8.o
+timer1PWMInit                                     timerx8.o
+timer1PWMInitICR                                  timerx8.o
+timer1PWMOff                                      timerx8.o
+                                                  pulse.o
+timer1SetPrescaler                                timerx8.o
+                                                  servo.o
+timer2ClearOverflowCount                          timerx8.o
+timer2GetOverflowCount                            timerx8.o
+timer2GetPrescaler                                timerx8.o
+timer2Init                                        timerx8.o
+timer2SetPrescaler                                timerx8.o
+timerAttach                                       timerx8.o
+                                                  pulse.o
+                                                  servo.o
+timerDetach                                       timerx8.o
+                                                  pulse.o
+                                                  servo.o
+timerInit                                         timerx8.o
+                                                  ocbot1.o
+timerPause                                        timerx8.o
+turn_led                                          ocbot1.o
+turn_off_led                                      ocbot1.o
+turn_on_led                                       ocbot1.o
+uartAddToTxBuffer                                 uart.o
+uartBufferedTx                                    uart.o
+uartFlushReceiveBuffer                            uart.o
+uartGetByte                                       uart.o
+uartGetRxBuffer                                   uart.o
+uartGetTxBuffer                                   uart.o
+uartInit                                          uart.o
+                                                  ocbot1.o
+uartInitBuffers                                   uart.o
+uartReadyTx                                       uart.o
+uartReceiveBufferIsEmpty                          uart.o
+uartReceiveByte                                   uart.o
+uartRxBuffer                                      uart.o
+uartRxOverflow                                    uart.o
+uartSendByte                                      uart.o
+                                                  ocbot1.o
+uartSendTxBuffer                                  uart.o
+uartSetBaudRate                                   uart.o
+                                                  ocbot1.o
+uartSetRxHandler                                  uart.o
+uartTxBuffer                                      uart.o
+w                                                 ocbot1.o
+x                                                 ocbot1.o

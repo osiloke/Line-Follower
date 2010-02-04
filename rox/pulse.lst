@@ -1,0 +1,770 @@
+   1               		.file	"pulse.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	pulseInit
+  19               	pulseInit:
+  20               	.LFB2:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23 0000 CF93      		push r28
+  24 0002 DF93      		push r29
+  25 0004 CDB7      		in r28,__SP_L__
+  26 0006 DEB7      		in r29,__SP_H__
+  27               	/* prologue end (size=4) */
+  28               	.LM2:
+  29 0008 0E94 0000 		call pulseT1Init
+  30               	/* epilogue: frame size=0 */
+  31 000c DF91      		pop r29
+  32 000e CF91      		pop r28
+  33 0010 0895      		ret
+  34               	/* epilogue end (size=3) */
+  35               	/* function pulseInit size 9 (2) */
+  36               	.LFE2:
+  38               	.global	pulseT1Init
+  40               	pulseT1Init:
+  41               	.LFB3:
+  42               	.LM3:
+  43               	/* prologue: frame size=0 */
+  44 0012 CF93      		push r28
+  45 0014 DF93      		push r29
+  46 0016 CDB7      		in r28,__SP_L__
+  47 0018 DEB7      		in r29,__SP_H__
+  48               	/* prologue end (size=4) */
+  49               	.LM4:
+  50 001a 0E94 0000 		call timer1PWMOff
+  51               	.LM5:
+  52 001e 1092 0000 		sts PulseT1AMode,__zero_reg__
+  53               	.LM6:
+  54 0022 1092 0000 		sts PulseT1BMode,__zero_reg__
+  55               	.LM7:
+  56 0026 1092 0000 		sts (PulseT1ACount)+1,__zero_reg__
+  57 002a 1092 0000 		sts PulseT1ACount,__zero_reg__
+  58               	.LM8:
+  59 002e 1092 0000 		sts (PulseT1BCount)+1,__zero_reg__
+  60 0032 1092 0000 		sts PulseT1BCount,__zero_reg__
+  61               	.LM9:
+  62 0036 80E0      		ldi r24,lo8(-32768)
+  63 0038 90E8      		ldi r25,hi8(-32768)
+  64 003a 9093 0000 		sts (PulseT1APeriodTics)+1,r25
+  65 003e 8093 0000 		sts PulseT1APeriodTics,r24
+  66               	.LM10:
+  67 0042 80E0      		ldi r24,lo8(-32768)
+  68 0044 90E8      		ldi r25,hi8(-32768)
+  69 0046 9093 0000 		sts (PulseT1BPeriodTics)+1,r25
+  70 004a 8093 0000 		sts PulseT1BPeriodTics,r24
+  71               	.LM11:
+  72 004e 80E0      		ldi r24,lo8(gs(pulseT1AService))
+  73 0050 90E0      		ldi r25,hi8(gs(pulseT1AService))
+  74 0052 BC01      		movw r22,r24
+  75 0054 82E0      		ldi r24,lo8(2)
+  76 0056 0E94 0000 		call timerAttach
+  77               	.LM12:
+  78 005a 80E0      		ldi r24,lo8(gs(pulseT1BService))
+  79 005c 90E0      		ldi r25,hi8(gs(pulseT1BService))
+  80 005e BC01      		movw r22,r24
+  81 0060 83E0      		ldi r24,lo8(3)
+  82 0062 0E94 0000 		call timerAttach
+  83               	/* epilogue: frame size=0 */
+  84 0066 DF91      		pop r29
+  85 0068 CF91      		pop r28
+  86 006a 0895      		ret
+  87               	/* epilogue end (size=3) */
+  88               	/* function pulseT1Init size 45 (38) */
+  89               	.LFE3:
+  91               	.global	pulseT1Off
+  93               	pulseT1Off:
+  94               	.LFB4:
+  95               	.LM13:
+  96               	/* prologue: frame size=0 */
+  97 006c CF93      		push r28
+  98 006e DF93      		push r29
+  99 0070 CDB7      		in r28,__SP_L__
+ 100 0072 DEB7      		in r29,__SP_H__
+ 101               	/* prologue end (size=4) */
+ 102               	.LM14:
+ 103 0074 1092 0000 		sts (PulseT1ACount)+1,__zero_reg__
+ 104 0078 1092 0000 		sts PulseT1ACount,__zero_reg__
+ 105               	.LM15:
+ 106 007c 1092 0000 		sts (PulseT1BCount)+1,__zero_reg__
+ 107 0080 1092 0000 		sts PulseT1BCount,__zero_reg__
+ 108               	.LM16:
+ 109 0084 A0E8      		ldi r26,lo8(128)
+ 110 0086 B0E0      		ldi r27,hi8(128)
+ 111 0088 E0E8      		ldi r30,lo8(128)
+ 112 008a F0E0      		ldi r31,hi8(128)
+ 113 008c 9081      		ld r25,Z
+ 114 008e 8FE7      		ldi r24,lo8(127)
+ 115 0090 8923      		and r24,r25
+ 116 0092 8C93      		st X,r24
+ 117               	.LM17:
+ 118 0094 A0E8      		ldi r26,lo8(128)
+ 119 0096 B0E0      		ldi r27,hi8(128)
+ 120 0098 E0E8      		ldi r30,lo8(128)
+ 121 009a F0E0      		ldi r31,hi8(128)
+ 122 009c 8081      		ld r24,Z
+ 123 009e 8F7B      		andi r24,lo8(-65)
+ 124 00a0 8C93      		st X,r24
+ 125               	.LM18:
+ 126 00a2 A0E8      		ldi r26,lo8(128)
+ 127 00a4 B0E0      		ldi r27,hi8(128)
+ 128 00a6 E0E8      		ldi r30,lo8(128)
+ 129 00a8 F0E0      		ldi r31,hi8(128)
+ 130 00aa 8081      		ld r24,Z
+ 131 00ac 8F7D      		andi r24,lo8(-33)
+ 132 00ae 8C93      		st X,r24
+ 133               	.LM19:
+ 134 00b0 A0E8      		ldi r26,lo8(128)
+ 135 00b2 B0E0      		ldi r27,hi8(128)
+ 136 00b4 E0E8      		ldi r30,lo8(128)
+ 137 00b6 F0E0      		ldi r31,hi8(128)
+ 138 00b8 8081      		ld r24,Z
+ 139 00ba 8F7E      		andi r24,lo8(-17)
+ 140 00bc 8C93      		st X,r24
+ 141               	.LM20:
+ 142 00be 82E0      		ldi r24,lo8(2)
+ 143 00c0 0E94 0000 		call timerDetach
+ 144               	.LM21:
+ 145 00c4 83E0      		ldi r24,lo8(3)
+ 146 00c6 0E94 0000 		call timerDetach
+ 147               	/* epilogue: frame size=0 */
+ 148 00ca DF91      		pop r29
+ 149 00cc CF91      		pop r28
+ 150 00ce 0895      		ret
+ 151               	/* epilogue end (size=3) */
+ 152               	/* function pulseT1Off size 50 (43) */
+ 153               	.LFE4:
+ 155               	.global	pulseT1ASetFreq
+ 157               	pulseT1ASetFreq:
+ 158               	.LFB5:
+ 159               	.LM22:
+ 160               	/* prologue: frame size=2 */
+ 161 00d0 EF92      		push r14
+ 162 00d2 FF92      		push r15
+ 163 00d4 0F93      		push r16
+ 164 00d6 1F93      		push r17
+ 165 00d8 CF93      		push r28
+ 166 00da DF93      		push r29
+ 167 00dc CDB7      		in r28,__SP_L__
+ 168 00de DEB7      		in r29,__SP_H__
+ 169 00e0 2297      		sbiw r28,2
+ 170 00e2 0FB6      		in __tmp_reg__,__SREG__
+ 171 00e4 F894      		cli
+ 172 00e6 DEBF      		out __SP_H__,r29
+ 173 00e8 0FBE      		out __SREG__,__tmp_reg__
+ 174 00ea CDBF      		out __SP_L__,r28
+ 175               	/* prologue end (size=14) */
+ 176 00ec 9A83      		std Y+2,r25
+ 177 00ee 8983      		std Y+1,r24
+ 178               	.LM23:
+ 179 00f0 0E94 0000 		call timer1GetPrescaler
+ 180 00f4 7C01      		movw r14,r24
+ 181 00f6 00E0      		ldi r16,lo8(0)
+ 182 00f8 10E0      		ldi r17,hi8(0)
+ 183 00fa 8981      		ldd r24,Y+1
+ 184 00fc 9A81      		ldd r25,Y+2
+ 185 00fe 9C01      		movw r18,r24
+ 186 0100 40E0      		ldi r20,lo8(0)
+ 187 0102 50E0      		ldi r21,hi8(0)
+ 188 0104 C801      		movw r24,r16
+ 189 0106 B701      		movw r22,r14
+ 190 0108 0E94 0000 		call __mulsi3
+ 191 010c DC01      		movw r26,r24
+ 192 010e CB01      		movw r24,r22
+ 193 0110 9C01      		movw r18,r24
+ 194 0112 AD01      		movw r20,r26
+ 195 0114 220F      		lsl r18
+ 196 0116 331F      		rol r19
+ 197 0118 441F      		rol r20
+ 198 011a 551F      		rol r21
+ 199 011c 80E0      		ldi r24,lo8(3686400)
+ 200 011e 90E4      		ldi r25,hi8(3686400)
+ 201 0120 A8E3      		ldi r26,hlo8(3686400)
+ 202 0122 B0E0      		ldi r27,hhi8(3686400)
+ 203 0124 BC01      		movw r22,r24
+ 204 0126 CD01      		movw r24,r26
+ 205 0128 0E94 0000 		call __udivmodsi4
+ 206 012c DA01      		movw r26,r20
+ 207 012e C901      		movw r24,r18
+ 208 0130 9093 0000 		sts (PulseT1APeriodTics)+1,r25
+ 209 0134 8093 0000 		sts PulseT1APeriodTics,r24
+ 210               	/* epilogue: frame size=2 */
+ 211 0138 2296      		adiw r28,2
+ 212 013a 0FB6      		in __tmp_reg__,__SREG__
+ 213 013c F894      		cli
+ 214 013e DEBF      		out __SP_H__,r29
+ 215 0140 0FBE      		out __SREG__,__tmp_reg__
+ 216 0142 CDBF      		out __SP_L__,r28
+ 217 0144 DF91      		pop r29
+ 218 0146 CF91      		pop r28
+ 219 0148 1F91      		pop r17
+ 220 014a 0F91      		pop r16
+ 221 014c FF90      		pop r15
+ 222 014e EF90      		pop r14
+ 223 0150 0895      		ret
+ 224               	/* epilogue end (size=13) */
+ 225               	/* function pulseT1ASetFreq size 65 (38) */
+ 226               	.LFE5:
+ 228               	.global	pulseT1BSetFreq
+ 230               	pulseT1BSetFreq:
+ 231               	.LFB6:
+ 232               	.LM24:
+ 233               	/* prologue: frame size=2 */
+ 234 0152 EF92      		push r14
+ 235 0154 FF92      		push r15
+ 236 0156 0F93      		push r16
+ 237 0158 1F93      		push r17
+ 238 015a CF93      		push r28
+ 239 015c DF93      		push r29
+ 240 015e CDB7      		in r28,__SP_L__
+ 241 0160 DEB7      		in r29,__SP_H__
+ 242 0162 2297      		sbiw r28,2
+ 243 0164 0FB6      		in __tmp_reg__,__SREG__
+ 244 0166 F894      		cli
+ 245 0168 DEBF      		out __SP_H__,r29
+ 246 016a 0FBE      		out __SREG__,__tmp_reg__
+ 247 016c CDBF      		out __SP_L__,r28
+ 248               	/* prologue end (size=14) */
+ 249 016e 9A83      		std Y+2,r25
+ 250 0170 8983      		std Y+1,r24
+ 251               	.LM25:
+ 252 0172 0E94 0000 		call timer1GetPrescaler
+ 253 0176 7C01      		movw r14,r24
+ 254 0178 00E0      		ldi r16,lo8(0)
+ 255 017a 10E0      		ldi r17,hi8(0)
+ 256 017c 8981      		ldd r24,Y+1
+ 257 017e 9A81      		ldd r25,Y+2
+ 258 0180 9C01      		movw r18,r24
+ 259 0182 40E0      		ldi r20,lo8(0)
+ 260 0184 50E0      		ldi r21,hi8(0)
+ 261 0186 C801      		movw r24,r16
+ 262 0188 B701      		movw r22,r14
+ 263 018a 0E94 0000 		call __mulsi3
+ 264 018e DC01      		movw r26,r24
+ 265 0190 CB01      		movw r24,r22
+ 266 0192 9C01      		movw r18,r24
+ 267 0194 AD01      		movw r20,r26
+ 268 0196 220F      		lsl r18
+ 269 0198 331F      		rol r19
+ 270 019a 441F      		rol r20
+ 271 019c 551F      		rol r21
+ 272 019e 80E0      		ldi r24,lo8(3686400)
+ 273 01a0 90E4      		ldi r25,hi8(3686400)
+ 274 01a2 A8E3      		ldi r26,hlo8(3686400)
+ 275 01a4 B0E0      		ldi r27,hhi8(3686400)
+ 276 01a6 BC01      		movw r22,r24
+ 277 01a8 CD01      		movw r24,r26
+ 278 01aa 0E94 0000 		call __udivmodsi4
+ 279 01ae DA01      		movw r26,r20
+ 280 01b0 C901      		movw r24,r18
+ 281 01b2 9093 0000 		sts (PulseT1BPeriodTics)+1,r25
+ 282 01b6 8093 0000 		sts PulseT1BPeriodTics,r24
+ 283               	/* epilogue: frame size=2 */
+ 284 01ba 2296      		adiw r28,2
+ 285 01bc 0FB6      		in __tmp_reg__,__SREG__
+ 286 01be F894      		cli
+ 287 01c0 DEBF      		out __SP_H__,r29
+ 288 01c2 0FBE      		out __SREG__,__tmp_reg__
+ 289 01c4 CDBF      		out __SP_L__,r28
+ 290 01c6 DF91      		pop r29
+ 291 01c8 CF91      		pop r28
+ 292 01ca 1F91      		pop r17
+ 293 01cc 0F91      		pop r16
+ 294 01ce FF90      		pop r15
+ 295 01d0 EF90      		pop r14
+ 296 01d2 0895      		ret
+ 297               	/* epilogue end (size=13) */
+ 298               	/* function pulseT1BSetFreq size 65 (38) */
+ 299               	.LFE6:
+ 301               	.global	pulseT1ARun
+ 303               	pulseT1ARun:
+ 304               	.LFB7:
+ 305               	.LM26:
+ 306               	/* prologue: frame size=2 */
+ 307 01d4 CF93      		push r28
+ 308 01d6 DF93      		push r29
+ 309 01d8 CDB7      		in r28,__SP_L__
+ 310 01da DEB7      		in r29,__SP_H__
+ 311 01dc 2297      		sbiw r28,2
+ 312 01de 0FB6      		in __tmp_reg__,__SREG__
+ 313 01e0 F894      		cli
+ 314 01e2 DEBF      		out __SP_H__,r29
+ 315 01e4 0FBE      		out __SREG__,__tmp_reg__
+ 316 01e6 CDBF      		out __SP_L__,r28
+ 317               	/* prologue end (size=10) */
+ 318 01e8 9A83      		std Y+2,r25
+ 319 01ea 8983      		std Y+1,r24
+ 320               	.LM27:
+ 321 01ec 8981      		ldd r24,Y+1
+ 322 01ee 9A81      		ldd r25,Y+2
+ 323 01f0 0097      		sbiw r24,0
+ 324 01f2 01F0      		breq .L12
+ 325               	.LM28:
+ 326 01f4 8091 0000 		lds r24,PulseT1AMode
+ 327 01f8 8160      		ori r24,lo8(1)
+ 328 01fa 8093 0000 		sts PulseT1AMode,r24
+ 329               	.LM29:
+ 330 01fe 8981      		ldd r24,Y+1
+ 331 0200 9A81      		ldd r25,Y+2
+ 332 0202 880F      		lsl r24
+ 333 0204 991F      		rol r25
+ 334 0206 9093 0000 		sts (PulseT1ACount)+1,r25
+ 335 020a 8093 0000 		sts PulseT1ACount,r24
+ 336 020e 00C0      		rjmp .L14
+ 337               	.L12:
+ 338               	.LM30:
+ 339 0210 8091 0000 		lds r24,PulseT1AMode
+ 340 0214 8E7F      		andi r24,lo8(-2)
+ 341 0216 8093 0000 		sts PulseT1AMode,r24
+ 342               	.LM31:
+ 343 021a 82E0      		ldi r24,lo8(2)
+ 344 021c 90E0      		ldi r25,hi8(2)
+ 345 021e 9093 0000 		sts (PulseT1ACount)+1,r25
+ 346 0222 8093 0000 		sts PulseT1ACount,r24
+ 347               	.L14:
+ 348               	.LM32:
+ 349 0226 A0E8      		ldi r26,lo8(128)
+ 350 0228 B0E0      		ldi r27,hi8(128)
+ 351 022a E0E8      		ldi r30,lo8(128)
+ 352 022c F0E0      		ldi r31,hi8(128)
+ 353 022e 9081      		ld r25,Z
+ 354 0230 8FE7      		ldi r24,lo8(127)
+ 355 0232 8923      		and r24,r25
+ 356 0234 8C93      		st X,r24
+ 357               	.LM33:
+ 358 0236 A0E8      		ldi r26,lo8(128)
+ 359 0238 B0E0      		ldi r27,hi8(128)
+ 360 023a E0E8      		ldi r30,lo8(128)
+ 361 023c F0E0      		ldi r31,hi8(128)
+ 362 023e 8081      		ld r24,Z
+ 363 0240 8064      		ori r24,lo8(64)
+ 364 0242 8C93      		st X,r24
+ 365               	.LM34:
+ 366 0244 A8E8      		ldi r26,lo8(136)
+ 367 0246 B0E0      		ldi r27,hi8(136)
+ 368 0248 E8E8      		ldi r30,lo8(136)
+ 369 024a F0E0      		ldi r31,hi8(136)
+ 370 024c 2081      		ld r18,Z
+ 371 024e 3181      		ldd r19,Z+1
+ 372 0250 8091 0000 		lds r24,PulseT1APeriodTics
+ 373 0254 9091 0000 		lds r25,(PulseT1APeriodTics)+1
+ 374 0258 820F      		add r24,r18
+ 375 025a 931F      		adc r25,r19
+ 376 025c 1196      		adiw r26,1
+ 377 025e 9C93      		st X,r25
+ 378 0260 8E93      		st -X,r24
+ 379               	.LM35:
+ 380 0262 AFE6      		ldi r26,lo8(111)
+ 381 0264 B0E0      		ldi r27,hi8(111)
+ 382 0266 EFE6      		ldi r30,lo8(111)
+ 383 0268 F0E0      		ldi r31,hi8(111)
+ 384 026a 8081      		ld r24,Z
+ 385 026c 8260      		ori r24,lo8(2)
+ 386 026e 8C93      		st X,r24
+ 387               	/* epilogue: frame size=2 */
+ 388 0270 2296      		adiw r28,2
+ 389 0272 0FB6      		in __tmp_reg__,__SREG__
+ 390 0274 F894      		cli
+ 391 0276 DEBF      		out __SP_H__,r29
+ 392 0278 0FBE      		out __SREG__,__tmp_reg__
+ 393 027a CDBF      		out __SP_L__,r28
+ 394 027c DF91      		pop r29
+ 395 027e CF91      		pop r28
+ 396 0280 0895      		ret
+ 397               	/* epilogue end (size=9) */
+ 398               	/* function pulseT1ARun size 87 (68) */
+ 399               	.LFE7:
+ 401               	.global	pulseT1BRun
+ 403               	pulseT1BRun:
+ 404               	.LFB8:
+ 405               	.LM36:
+ 406               	/* prologue: frame size=2 */
+ 407 0282 CF93      		push r28
+ 408 0284 DF93      		push r29
+ 409 0286 CDB7      		in r28,__SP_L__
+ 410 0288 DEB7      		in r29,__SP_H__
+ 411 028a 2297      		sbiw r28,2
+ 412 028c 0FB6      		in __tmp_reg__,__SREG__
+ 413 028e F894      		cli
+ 414 0290 DEBF      		out __SP_H__,r29
+ 415 0292 0FBE      		out __SREG__,__tmp_reg__
+ 416 0294 CDBF      		out __SP_L__,r28
+ 417               	/* prologue end (size=10) */
+ 418 0296 9A83      		std Y+2,r25
+ 419 0298 8983      		std Y+1,r24
+ 420               	.LM37:
+ 421 029a 8981      		ldd r24,Y+1
+ 422 029c 9A81      		ldd r25,Y+2
+ 423 029e 0097      		sbiw r24,0
+ 424 02a0 01F0      		breq .L17
+ 425               	.LM38:
+ 426 02a2 8091 0000 		lds r24,PulseT1BMode
+ 427 02a6 8160      		ori r24,lo8(1)
+ 428 02a8 8093 0000 		sts PulseT1BMode,r24
+ 429               	.LM39:
+ 430 02ac 8981      		ldd r24,Y+1
+ 431 02ae 9A81      		ldd r25,Y+2
+ 432 02b0 880F      		lsl r24
+ 433 02b2 991F      		rol r25
+ 434 02b4 9093 0000 		sts (PulseT1BCount)+1,r25
+ 435 02b8 8093 0000 		sts PulseT1BCount,r24
+ 436 02bc 00C0      		rjmp .L19
+ 437               	.L17:
+ 438               	.LM40:
+ 439 02be 8091 0000 		lds r24,PulseT1BMode
+ 440 02c2 8E7F      		andi r24,lo8(-2)
+ 441 02c4 8093 0000 		sts PulseT1BMode,r24
+ 442               	.LM41:
+ 443 02c8 82E0      		ldi r24,lo8(2)
+ 444 02ca 90E0      		ldi r25,hi8(2)
+ 445 02cc 9093 0000 		sts (PulseT1BCount)+1,r25
+ 446 02d0 8093 0000 		sts PulseT1BCount,r24
+ 447               	.L19:
+ 448               	.LM42:
+ 449 02d4 A0E8      		ldi r26,lo8(128)
+ 450 02d6 B0E0      		ldi r27,hi8(128)
+ 451 02d8 E0E8      		ldi r30,lo8(128)
+ 452 02da F0E0      		ldi r31,hi8(128)
+ 453 02dc 8081      		ld r24,Z
+ 454 02de 8F7D      		andi r24,lo8(-33)
+ 455 02e0 8C93      		st X,r24
+ 456               	.LM43:
+ 457 02e2 A0E8      		ldi r26,lo8(128)
+ 458 02e4 B0E0      		ldi r27,hi8(128)
+ 459 02e6 E0E8      		ldi r30,lo8(128)
+ 460 02e8 F0E0      		ldi r31,hi8(128)
+ 461 02ea 8081      		ld r24,Z
+ 462 02ec 8061      		ori r24,lo8(16)
+ 463 02ee 8C93      		st X,r24
+ 464               	.LM44:
+ 465 02f0 AAE8      		ldi r26,lo8(138)
+ 466 02f2 B0E0      		ldi r27,hi8(138)
+ 467 02f4 EAE8      		ldi r30,lo8(138)
+ 468 02f6 F0E0      		ldi r31,hi8(138)
+ 469 02f8 2081      		ld r18,Z
+ 470 02fa 3181      		ldd r19,Z+1
+ 471 02fc 8091 0000 		lds r24,PulseT1BPeriodTics
+ 472 0300 9091 0000 		lds r25,(PulseT1BPeriodTics)+1
+ 473 0304 820F      		add r24,r18
+ 474 0306 931F      		adc r25,r19
+ 475 0308 1196      		adiw r26,1
+ 476 030a 9C93      		st X,r25
+ 477 030c 8E93      		st -X,r24
+ 478               	.LM45:
+ 479 030e AFE6      		ldi r26,lo8(111)
+ 480 0310 B0E0      		ldi r27,hi8(111)
+ 481 0312 EFE6      		ldi r30,lo8(111)
+ 482 0314 F0E0      		ldi r31,hi8(111)
+ 483 0316 8081      		ld r24,Z
+ 484 0318 8460      		ori r24,lo8(4)
+ 485 031a 8C93      		st X,r24
+ 486               	/* epilogue: frame size=2 */
+ 487 031c 2296      		adiw r28,2
+ 488 031e 0FB6      		in __tmp_reg__,__SREG__
+ 489 0320 F894      		cli
+ 490 0322 DEBF      		out __SP_H__,r29
+ 491 0324 0FBE      		out __SREG__,__tmp_reg__
+ 492 0326 CDBF      		out __SP_L__,r28
+ 493 0328 DF91      		pop r29
+ 494 032a CF91      		pop r28
+ 495 032c 0895      		ret
+ 496               	/* epilogue end (size=9) */
+ 497               	/* function pulseT1BRun size 86 (67) */
+ 498               	.LFE8:
+ 500               	.global	pulseT1AStop
+ 502               	pulseT1AStop:
+ 503               	.LFB9:
+ 504               	.LM46:
+ 505               	/* prologue: frame size=0 */
+ 506 032e CF93      		push r28
+ 507 0330 DF93      		push r29
+ 508 0332 CDB7      		in r28,__SP_L__
+ 509 0334 DEB7      		in r29,__SP_H__
+ 510               	/* prologue end (size=4) */
+ 511               	.LM47:
+ 512 0336 8091 0000 		lds r24,PulseT1AMode
+ 513 033a 8160      		ori r24,lo8(1)
+ 514 033c 8093 0000 		sts PulseT1AMode,r24
+ 515               	.LM48:
+ 516 0340 1092 0000 		sts (PulseT1ACount)+1,__zero_reg__
+ 517 0344 1092 0000 		sts PulseT1ACount,__zero_reg__
+ 518               	/* epilogue: frame size=0 */
+ 519 0348 DF91      		pop r29
+ 520 034a CF91      		pop r28
+ 521 034c 0895      		ret
+ 522               	/* epilogue end (size=3) */
+ 523               	/* function pulseT1AStop size 16 (9) */
+ 524               	.LFE9:
+ 526               	.global	pulseT1BStop
+ 528               	pulseT1BStop:
+ 529               	.LFB10:
+ 530               	.LM49:
+ 531               	/* prologue: frame size=0 */
+ 532 034e CF93      		push r28
+ 533 0350 DF93      		push r29
+ 534 0352 CDB7      		in r28,__SP_L__
+ 535 0354 DEB7      		in r29,__SP_H__
+ 536               	/* prologue end (size=4) */
+ 537               	.LM50:
+ 538 0356 8091 0000 		lds r24,PulseT1BMode
+ 539 035a 8160      		ori r24,lo8(1)
+ 540 035c 8093 0000 		sts PulseT1BMode,r24
+ 541               	.LM51:
+ 542 0360 1092 0000 		sts (PulseT1BCount)+1,__zero_reg__
+ 543 0364 1092 0000 		sts PulseT1BCount,__zero_reg__
+ 544               	/* epilogue: frame size=0 */
+ 545 0368 DF91      		pop r29
+ 546 036a CF91      		pop r28
+ 547 036c 0895      		ret
+ 548               	/* epilogue end (size=3) */
+ 549               	/* function pulseT1BStop size 16 (9) */
+ 550               	.LFE10:
+ 552               	.global	pulseT1ARemaining
+ 554               	pulseT1ARemaining:
+ 555               	.LFB11:
+ 556               	.LM52:
+ 557               	/* prologue: frame size=0 */
+ 558 036e CF93      		push r28
+ 559 0370 DF93      		push r29
+ 560 0372 CDB7      		in r28,__SP_L__
+ 561 0374 DEB7      		in r29,__SP_H__
+ 562               	/* prologue end (size=4) */
+ 563               	.LM53:
+ 564 0376 8091 0000 		lds r24,PulseT1ACount
+ 565 037a 9091 0000 		lds r25,(PulseT1ACount)+1
+ 566 037e 0196      		adiw r24,1
+ 567 0380 9695      		lsr r25
+ 568 0382 8795      		ror r24
+ 569               	/* epilogue: frame size=0 */
+ 570 0384 DF91      		pop r29
+ 571 0386 CF91      		pop r28
+ 572 0388 0895      		ret
+ 573               	/* epilogue end (size=3) */
+ 574               	/* function pulseT1ARemaining size 14 (7) */
+ 575               	.LFE11:
+ 577               	.global	pulseT1BRemaining
+ 579               	pulseT1BRemaining:
+ 580               	.LFB12:
+ 581               	.LM54:
+ 582               	/* prologue: frame size=0 */
+ 583 038a CF93      		push r28
+ 584 038c DF93      		push r29
+ 585 038e CDB7      		in r28,__SP_L__
+ 586 0390 DEB7      		in r29,__SP_H__
+ 587               	/* prologue end (size=4) */
+ 588               	.LM55:
+ 589 0392 8091 0000 		lds r24,PulseT1BCount
+ 590 0396 9091 0000 		lds r25,(PulseT1BCount)+1
+ 591 039a 0196      		adiw r24,1
+ 592 039c 9695      		lsr r25
+ 593 039e 8795      		ror r24
+ 594               	/* epilogue: frame size=0 */
+ 595 03a0 DF91      		pop r29
+ 596 03a2 CF91      		pop r28
+ 597 03a4 0895      		ret
+ 598               	/* epilogue end (size=3) */
+ 599               	/* function pulseT1BRemaining size 14 (7) */
+ 600               	.LFE12:
+ 602               	.global	pulseT1AService
+ 604               	pulseT1AService:
+ 605               	.LFB13:
+ 606               	.LM56:
+ 607               	/* prologue: frame size=0 */
+ 608 03a6 CF93      		push r28
+ 609 03a8 DF93      		push r29
+ 610 03aa CDB7      		in r28,__SP_L__
+ 611 03ac DEB7      		in r29,__SP_H__
+ 612               	/* prologue end (size=4) */
+ 613               	.LM57:
+ 614 03ae 8091 0000 		lds r24,PulseT1ACount
+ 615 03b2 9091 0000 		lds r25,(PulseT1ACount)+1
+ 616 03b6 0097      		sbiw r24,0
+ 617 03b8 01F0      		breq .L30
+ 618               	.LM58:
+ 619 03ba A8E8      		ldi r26,lo8(136)
+ 620 03bc B0E0      		ldi r27,hi8(136)
+ 621 03be E8E8      		ldi r30,lo8(136)
+ 622 03c0 F0E0      		ldi r31,hi8(136)
+ 623 03c2 2081      		ld r18,Z
+ 624 03c4 3181      		ldd r19,Z+1
+ 625 03c6 8091 0000 		lds r24,PulseT1APeriodTics
+ 626 03ca 9091 0000 		lds r25,(PulseT1APeriodTics)+1
+ 627 03ce 820F      		add r24,r18
+ 628 03d0 931F      		adc r25,r19
+ 629 03d2 1196      		adiw r26,1
+ 630 03d4 9C93      		st X,r25
+ 631 03d6 8E93      		st -X,r24
+ 632               	.LM59:
+ 633 03d8 8091 0000 		lds r24,PulseT1AMode
+ 634 03dc 882F      		mov r24,r24
+ 635 03de 90E0      		ldi r25,lo8(0)
+ 636 03e0 8170      		andi r24,lo8(1)
+ 637 03e2 9070      		andi r25,hi8(1)
+ 638 03e4 8823      		tst r24
+ 639 03e6 01F0      		breq .L35
+ 640               	.LM60:
+ 641 03e8 8091 0000 		lds r24,PulseT1ACount
+ 642 03ec 9091 0000 		lds r25,(PulseT1ACount)+1
+ 643 03f0 0197      		sbiw r24,1
+ 644 03f2 9093 0000 		sts (PulseT1ACount)+1,r25
+ 645 03f6 8093 0000 		sts PulseT1ACount,r24
+ 646 03fa 00C0      		rjmp .L35
+ 647               	.L30:
+ 648               	.LM61:
+ 649 03fc A0E8      		ldi r26,lo8(128)
+ 650 03fe B0E0      		ldi r27,hi8(128)
+ 651 0400 E0E8      		ldi r30,lo8(128)
+ 652 0402 F0E0      		ldi r31,hi8(128)
+ 653 0404 9081      		ld r25,Z
+ 654 0406 8FE7      		ldi r24,lo8(127)
+ 655 0408 8923      		and r24,r25
+ 656 040a 8C93      		st X,r24
+ 657               	.LM62:
+ 658 040c A0E8      		ldi r26,lo8(128)
+ 659 040e B0E0      		ldi r27,hi8(128)
+ 660 0410 E0E8      		ldi r30,lo8(128)
+ 661 0412 F0E0      		ldi r31,hi8(128)
+ 662 0414 8081      		ld r24,Z
+ 663 0416 8F7B      		andi r24,lo8(-65)
+ 664 0418 8C93      		st X,r24
+ 665               	.LM63:
+ 666 041a AFE6      		ldi r26,lo8(111)
+ 667 041c B0E0      		ldi r27,hi8(111)
+ 668 041e EFE6      		ldi r30,lo8(111)
+ 669 0420 F0E0      		ldi r31,hi8(111)
+ 670 0422 8081      		ld r24,Z
+ 671 0424 8D7F      		andi r24,lo8(-3)
+ 672 0426 8C93      		st X,r24
+ 673               	.L35:
+ 674               	/* epilogue: frame size=0 */
+ 675 0428 DF91      		pop r29
+ 676 042a CF91      		pop r28
+ 677 042c 0895      		ret
+ 678               	/* epilogue end (size=3) */
+ 679               	/* function pulseT1AService size 68 (61) */
+ 680               	.LFE13:
+ 682               	.global	pulseT1BService
+ 684               	pulseT1BService:
+ 685               	.LFB14:
+ 686               	.LM64:
+ 687               	/* prologue: frame size=0 */
+ 688 042e CF93      		push r28
+ 689 0430 DF93      		push r29
+ 690 0432 CDB7      		in r28,__SP_L__
+ 691 0434 DEB7      		in r29,__SP_H__
+ 692               	/* prologue end (size=4) */
+ 693               	.LM65:
+ 694 0436 8091 0000 		lds r24,PulseT1BCount
+ 695 043a 9091 0000 		lds r25,(PulseT1BCount)+1
+ 696 043e 0097      		sbiw r24,0
+ 697 0440 01F0      		breq .L37
+ 698               	.LM66:
+ 699 0442 AAE8      		ldi r26,lo8(138)
+ 700 0444 B0E0      		ldi r27,hi8(138)
+ 701 0446 EAE8      		ldi r30,lo8(138)
+ 702 0448 F0E0      		ldi r31,hi8(138)
+ 703 044a 2081      		ld r18,Z
+ 704 044c 3181      		ldd r19,Z+1
+ 705 044e 8091 0000 		lds r24,PulseT1BPeriodTics
+ 706 0452 9091 0000 		lds r25,(PulseT1BPeriodTics)+1
+ 707 0456 820F      		add r24,r18
+ 708 0458 931F      		adc r25,r19
+ 709 045a 1196      		adiw r26,1
+ 710 045c 9C93      		st X,r25
+ 711 045e 8E93      		st -X,r24
+ 712               	.LM67:
+ 713 0460 8091 0000 		lds r24,PulseT1BMode
+ 714 0464 882F      		mov r24,r24
+ 715 0466 90E0      		ldi r25,lo8(0)
+ 716 0468 8170      		andi r24,lo8(1)
+ 717 046a 9070      		andi r25,hi8(1)
+ 718 046c 8823      		tst r24
+ 719 046e 01F0      		breq .L42
+ 720               	.LM68:
+ 721 0470 8091 0000 		lds r24,PulseT1BCount
+ 722 0474 9091 0000 		lds r25,(PulseT1BCount)+1
+ 723 0478 0197      		sbiw r24,1
+ 724 047a 9093 0000 		sts (PulseT1BCount)+1,r25
+ 725 047e 8093 0000 		sts PulseT1BCount,r24
+ 726 0482 00C0      		rjmp .L42
+ 727               	.L37:
+ 728               	.LM69:
+ 729 0484 A0E8      		ldi r26,lo8(128)
+ 730 0486 B0E0      		ldi r27,hi8(128)
+ 731 0488 E0E8      		ldi r30,lo8(128)
+ 732 048a F0E0      		ldi r31,hi8(128)
+ 733 048c 8081      		ld r24,Z
+ 734 048e 8F7D      		andi r24,lo8(-33)
+ 735 0490 8C93      		st X,r24
+ 736               	.LM70:
+ 737 0492 A0E8      		ldi r26,lo8(128)
+ 738 0494 B0E0      		ldi r27,hi8(128)
+ 739 0496 E0E8      		ldi r30,lo8(128)
+ 740 0498 F0E0      		ldi r31,hi8(128)
+ 741 049a 8081      		ld r24,Z
+ 742 049c 8F7E      		andi r24,lo8(-17)
+ 743 049e 8C93      		st X,r24
+ 744               	.LM71:
+ 745 04a0 AFE6      		ldi r26,lo8(111)
+ 746 04a2 B0E0      		ldi r27,hi8(111)
+ 747 04a4 EFE6      		ldi r30,lo8(111)
+ 748 04a6 F0E0      		ldi r31,hi8(111)
+ 749 04a8 8081      		ld r24,Z
+ 750 04aa 8B7F      		andi r24,lo8(-5)
+ 751 04ac 8C93      		st X,r24
+ 752               	.L42:
+ 753               	/* epilogue: frame size=0 */
+ 754 04ae DF91      		pop r29
+ 755 04b0 CF91      		pop r28
+ 756 04b2 0895      		ret
+ 757               	/* epilogue end (size=3) */
+ 758               	/* function pulseT1BService size 67 (60) */
+ 759               	.LFE14:
+ 761               		.lcomm PulseT1AMode,1
+ 762               		.lcomm PulseT1ACount,2
+ 763               		.lcomm PulseT1APeriodTics,2
+ 764               		.lcomm PulseT1BMode,1
+ 765               		.lcomm PulseT1BCount,2
+ 766               		.lcomm PulseT1BPeriodTics,2
+ 887               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 pulse.c
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:6      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:19     .text:00000000 pulseInit
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:40     .text:00000012 pulseT1Init
+                             .bss:00000000 PulseT1AMode
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:763    .bss:00000005 PulseT1BMode
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:761    .bss:00000001 PulseT1ACount
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:764    .bss:00000006 PulseT1BCount
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:762    .bss:00000003 PulseT1APeriodTics
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:765    .bss:00000008 PulseT1BPeriodTics
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:604    .text:000003a6 pulseT1AService
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:684    .text:0000042e pulseT1BService
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:93     .text:0000006c pulseT1Off
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:157    .text:000000d0 pulseT1ASetFreq
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:230    .text:00000152 pulseT1BSetFreq
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:303    .text:000001d4 pulseT1ARun
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:403    .text:00000282 pulseT1BRun
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:502    .text:0000032e pulseT1AStop
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:528    .text:0000034e pulseT1BStop
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:554    .text:0000036e pulseT1ARemaining
+C:\DOCUME~1\Thomas\LOCALS~1\Temp/ccQLIN9s.s:579    .text:0000038a pulseT1BRemaining
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+timer1PWMOff
+timerAttach
+timerDetach
+timer1GetPrescaler
+__mulsi3
+__udivmodsi4

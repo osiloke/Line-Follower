@@ -1,0 +1,613 @@
+   1               		.file	"ocbot1.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	turn_on_led
+  20               	turn_on_led:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24 0000 CF93      		push r28
+  25 0002 DF93      		push r29
+  26 0004 CDB7      		in r28,__SP_L__
+  27 0006 DEB7      		in r29,__SP_H__
+  28               	/* prologue end (size=4) */
+  29               	.LM2:
+  30 0008 A2E3      		ldi r26,lo8(50)
+  31 000a B0E0      		ldi r27,hi8(50)
+  32 000c E2E3      		ldi r30,lo8(50)
+  33 000e F0E0      		ldi r31,hi8(50)
+  34 0010 8081      		ld r24,Z
+  35 0012 8F7E      		andi r24,lo8(-17)
+  36 0014 8C93      		st X,r24
+  37               	/* epilogue: frame size=0 */
+  38 0016 DF91      		pop r29
+  39 0018 CF91      		pop r28
+  40 001a 0895      		ret
+  41               	/* epilogue end (size=3) */
+  42               	/* function turn_on_led size 14 (7) */
+  43               	.LFE2:
+  45               	.global	turn_off_led
+  47               	turn_off_led:
+  48               	.LFB3:
+  49               	.LM3:
+  50               	/* prologue: frame size=0 */
+  51 001c CF93      		push r28
+  52 001e DF93      		push r29
+  53 0020 CDB7      		in r28,__SP_L__
+  54 0022 DEB7      		in r29,__SP_H__
+  55               	/* prologue end (size=4) */
+  56               	.LM4:
+  57 0024 A2E3      		ldi r26,lo8(50)
+  58 0026 B0E0      		ldi r27,hi8(50)
+  59 0028 E2E3      		ldi r30,lo8(50)
+  60 002a F0E0      		ldi r31,hi8(50)
+  61 002c 8081      		ld r24,Z
+  62 002e 8061      		ori r24,lo8(16)
+  63 0030 8C93      		st X,r24
+  64               	/* epilogue: frame size=0 */
+  65 0032 DF91      		pop r29
+  66 0034 CF91      		pop r28
+  67 0036 0895      		ret
+  68               	/* epilogue end (size=3) */
+  69               	/* function turn_off_led size 14 (7) */
+  70               	.LFE3:
+  72               	.global	servo_left
+  74               	servo_left:
+  75               	.LFB4:
+  76               	.LM5:
+  77               	/* prologue: frame size=4 */
+  78 0038 CF93      		push r28
+  79 003a DF93      		push r29
+  80 003c CDB7      		in r28,__SP_L__
+  81 003e DEB7      		in r29,__SP_H__
+  82 0040 2497      		sbiw r28,4
+  83 0042 0FB6      		in __tmp_reg__,__SREG__
+  84 0044 F894      		cli
+  85 0046 DEBF      		out __SP_H__,r29
+  86 0048 0FBE      		out __SREG__,__tmp_reg__
+  87 004a CDBF      		out __SP_L__,r28
+  88               	/* prologue end (size=10) */
+  89 004c 6983      		std Y+1,r22
+  90 004e 7A83      		std Y+2,r23
+  91 0050 8B83      		std Y+3,r24
+  92 0052 9C83      		std Y+4,r25
+  93               	.LM6:
+  94 0054 A2E3      		ldi r26,lo8(50)
+  95 0056 B0E0      		ldi r27,hi8(50)
+  96 0058 E2E3      		ldi r30,lo8(50)
+  97 005a F0E0      		ldi r31,hi8(50)
+  98 005c 8081      		ld r24,Z
+  99 005e 8160      		ori r24,lo8(1)
+ 100 0060 8C93      		st X,r24
+ 101               	.LM7:
+ 102 0062 8981      		ldd r24,Y+1
+ 103 0064 9A81      		ldd r25,Y+2
+ 104 0066 AB81      		ldd r26,Y+3
+ 105 0068 BC81      		ldd r27,Y+4
+ 106 006a BC01      		movw r22,r24
+ 107 006c CD01      		movw r24,r26
+ 108 006e 0E94 0000 		call delay_cycles
+ 109               	.LM8:
+ 110 0072 A2E3      		ldi r26,lo8(50)
+ 111 0074 B0E0      		ldi r27,hi8(50)
+ 112 0076 E2E3      		ldi r30,lo8(50)
+ 113 0078 F0E0      		ldi r31,hi8(50)
+ 114 007a 8081      		ld r24,Z
+ 115 007c 8E7F      		andi r24,lo8(-2)
+ 116 007e 8C93      		st X,r24
+ 117               	.LM9:
+ 118 0080 88EC      		ldi r24,lo8(200)
+ 119 0082 90E0      		ldi r25,hi8(200)
+ 120 0084 0E94 0000 		call delay_cycles
+ 121               	/* epilogue: frame size=4 */
+ 122 0088 2496      		adiw r28,4
+ 123 008a 0FB6      		in __tmp_reg__,__SREG__
+ 124 008c F894      		cli
+ 125 008e DEBF      		out __SP_H__,r29
+ 126 0090 0FBE      		out __SREG__,__tmp_reg__
+ 127 0092 CDBF      		out __SP_L__,r28
+ 128 0094 DF91      		pop r29
+ 129 0096 CF91      		pop r28
+ 130 0098 0895      		ret
+ 131               	/* epilogue end (size=9) */
+ 132               	/* function servo_left size 49 (30) */
+ 133               	.LFE4:
+ 135               	.global	servo_right
+ 137               	servo_right:
+ 138               	.LFB5:
+ 139               	.LM10:
+ 140               	/* prologue: frame size=4 */
+ 141 009a CF93      		push r28
+ 142 009c DF93      		push r29
+ 143 009e CDB7      		in r28,__SP_L__
+ 144 00a0 DEB7      		in r29,__SP_H__
+ 145 00a2 2497      		sbiw r28,4
+ 146 00a4 0FB6      		in __tmp_reg__,__SREG__
+ 147 00a6 F894      		cli
+ 148 00a8 DEBF      		out __SP_H__,r29
+ 149 00aa 0FBE      		out __SREG__,__tmp_reg__
+ 150 00ac CDBF      		out __SP_L__,r28
+ 151               	/* prologue end (size=10) */
+ 152 00ae 6983      		std Y+1,r22
+ 153 00b0 7A83      		std Y+2,r23
+ 154 00b2 8B83      		std Y+3,r24
+ 155 00b4 9C83      		std Y+4,r25
+ 156               	.LM11:
+ 157 00b6 A2E3      		ldi r26,lo8(50)
+ 158 00b8 B0E0      		ldi r27,hi8(50)
+ 159 00ba E2E3      		ldi r30,lo8(50)
+ 160 00bc F0E0      		ldi r31,hi8(50)
+ 161 00be 8081      		ld r24,Z
+ 162 00c0 8260      		ori r24,lo8(2)
+ 163 00c2 8C93      		st X,r24
+ 164               	.LM12:
+ 165 00c4 8981      		ldd r24,Y+1
+ 166 00c6 9A81      		ldd r25,Y+2
+ 167 00c8 AB81      		ldd r26,Y+3
+ 168 00ca BC81      		ldd r27,Y+4
+ 169 00cc BC01      		movw r22,r24
+ 170 00ce CD01      		movw r24,r26
+ 171 00d0 0E94 0000 		call delay_cycles
+ 172               	.LM13:
+ 173 00d4 A2E3      		ldi r26,lo8(50)
+ 174 00d6 B0E0      		ldi r27,hi8(50)
+ 175 00d8 E2E3      		ldi r30,lo8(50)
+ 176 00da F0E0      		ldi r31,hi8(50)
+ 177 00dc 8081      		ld r24,Z
+ 178 00de 8D7F      		andi r24,lo8(-3)
+ 179 00e0 8C93      		st X,r24
+ 180               	.LM14:
+ 181 00e2 88EC      		ldi r24,lo8(200)
+ 182 00e4 90E0      		ldi r25,hi8(200)
+ 183 00e6 0E94 0000 		call delay_cycles
+ 184               	/* epilogue: frame size=4 */
+ 185 00ea 2496      		adiw r28,4
+ 186 00ec 0FB6      		in __tmp_reg__,__SREG__
+ 187 00ee F894      		cli
+ 188 00f0 DEBF      		out __SP_H__,r29
+ 189 00f2 0FBE      		out __SREG__,__tmp_reg__
+ 190 00f4 CDBF      		out __SP_L__,r28
+ 191 00f6 DF91      		pop r29
+ 192 00f8 CF91      		pop r28
+ 193 00fa 0895      		ret
+ 194               	/* epilogue end (size=9) */
+ 195               	/* function servo_right size 49 (30) */
+ 196               	.LFE5:
+ 198               	.global	robot_turn_left
+ 200               	robot_turn_left:
+ 201               	.LFB6:
+ 202               	.LM15:
+ 203               	/* prologue: frame size=0 */
+ 204 00fc CF93      		push r28
+ 205 00fe DF93      		push r29
+ 206 0100 CDB7      		in r28,__SP_L__
+ 207 0102 DEB7      		in r29,__SP_H__
+ 208               	/* prologue end (size=4) */
+ 209               	.LM16:
+ 210 0104 67E2      		ldi r22,lo8(39)
+ 211 0106 70E0      		ldi r23,hi8(39)
+ 212 0108 80E0      		ldi r24,hlo8(39)
+ 213 010a 90E0      		ldi r25,hhi8(39)
+ 214 010c 0E94 0000 		call servo_left
+ 215               	.LM17:
+ 216 0110 69E2      		ldi r22,lo8(41)
+ 217 0112 70E0      		ldi r23,hi8(41)
+ 218 0114 80E0      		ldi r24,hlo8(41)
+ 219 0116 90E0      		ldi r25,hhi8(41)
+ 220 0118 0E94 0000 		call servo_right
+ 221               	/* epilogue: frame size=0 */
+ 222 011c DF91      		pop r29
+ 223 011e CF91      		pop r28
+ 224 0120 0895      		ret
+ 225               	/* epilogue end (size=3) */
+ 226               	/* function robot_turn_left size 19 (12) */
+ 227               	.LFE6:
+ 229               	.global	robot_turn_right
+ 231               	robot_turn_right:
+ 232               	.LFB7:
+ 233               	.LM18:
+ 234               	/* prologue: frame size=0 */
+ 235 0122 CF93      		push r28
+ 236 0124 DF93      		push r29
+ 237 0126 CDB7      		in r28,__SP_L__
+ 238 0128 DEB7      		in r29,__SP_H__
+ 239               	/* prologue end (size=4) */
+ 240               	.LM19:
+ 241 012a 61E2      		ldi r22,lo8(33)
+ 242 012c 70E0      		ldi r23,hi8(33)
+ 243 012e 80E0      		ldi r24,hlo8(33)
+ 244 0130 90E0      		ldi r25,hhi8(33)
+ 245 0132 0E94 0000 		call servo_left
+ 246               	.LM20:
+ 247 0136 63E2      		ldi r22,lo8(35)
+ 248 0138 70E0      		ldi r23,hi8(35)
+ 249 013a 80E0      		ldi r24,hlo8(35)
+ 250 013c 90E0      		ldi r25,hhi8(35)
+ 251 013e 0E94 0000 		call servo_right
+ 252               	/* epilogue: frame size=0 */
+ 253 0142 DF91      		pop r29
+ 254 0144 CF91      		pop r28
+ 255 0146 0895      		ret
+ 256               	/* epilogue end (size=3) */
+ 257               	/* function robot_turn_right size 19 (12) */
+ 258               	.LFE7:
+ 260               	.global	robot_go_straight
+ 262               	robot_go_straight:
+ 263               	.LFB8:
+ 264               	.LM21:
+ 265               	/* prologue: frame size=0 */
+ 266 0148 CF93      		push r28
+ 267 014a DF93      		push r29
+ 268 014c CDB7      		in r28,__SP_L__
+ 269 014e DEB7      		in r29,__SP_H__
+ 270               	/* prologue end (size=4) */
+ 271               	.LM22:
+ 272 0150 6DE1      		ldi r22,lo8(29)
+ 273 0152 70E0      		ldi r23,hi8(29)
+ 274 0154 80E0      		ldi r24,hlo8(29)
+ 275 0156 90E0      		ldi r25,hhi8(29)
+ 276 0158 0E94 0000 		call servo_left
+ 277               	.LM23:
+ 278 015c 6DE2      		ldi r22,lo8(45)
+ 279 015e 70E0      		ldi r23,hi8(45)
+ 280 0160 80E0      		ldi r24,hlo8(45)
+ 281 0162 90E0      		ldi r25,hhi8(45)
+ 282 0164 0E94 0000 		call servo_right
+ 283               	/* epilogue: frame size=0 */
+ 284 0168 DF91      		pop r29
+ 285 016a CF91      		pop r28
+ 286 016c 0895      		ret
+ 287               	/* epilogue end (size=3) */
+ 288               	/* function robot_go_straight size 19 (12) */
+ 289               	.LFE8:
+ 291               	.global	robot_go_reverse
+ 293               	robot_go_reverse:
+ 294               	.LFB9:
+ 295               	.LM24:
+ 296               	/* prologue: frame size=0 */
+ 297 016e CF93      		push r28
+ 298 0170 DF93      		push r29
+ 299 0172 CDB7      		in r28,__SP_L__
+ 300 0174 DEB7      		in r29,__SP_H__
+ 301               	/* prologue end (size=4) */
+ 302               	.LM25:
+ 303 0176 6DE2      		ldi r22,lo8(45)
+ 304 0178 70E0      		ldi r23,hi8(45)
+ 305 017a 80E0      		ldi r24,hlo8(45)
+ 306 017c 90E0      		ldi r25,hhi8(45)
+ 307 017e 0E94 0000 		call servo_left
+ 308               	.LM26:
+ 309 0182 6DE1      		ldi r22,lo8(29)
+ 310 0184 70E0      		ldi r23,hi8(29)
+ 311 0186 80E0      		ldi r24,hlo8(29)
+ 312 0188 90E0      		ldi r25,hhi8(29)
+ 313 018a 0E94 0000 		call servo_right
+ 314               	/* epilogue: frame size=0 */
+ 315 018e DF91      		pop r29
+ 316 0190 CF91      		pop r28
+ 317 0192 0895      		ret
+ 318               	/* epilogue end (size=3) */
+ 319               	/* function robot_go_reverse size 19 (12) */
+ 320               	.LFE9:
+ 322               	.global	hold_position
+ 324               	hold_position:
+ 325               	.LFB10:
+ 326               	.LM27:
+ 327               	/* prologue: frame size=0 */
+ 328 0194 CF93      		push r28
+ 329 0196 DF93      		push r29
+ 330 0198 CDB7      		in r28,__SP_L__
+ 331 019a DEB7      		in r29,__SP_H__
+ 332               	/* prologue end (size=4) */
+ 333               	.LM28:
+ 334 019c 67E2      		ldi r22,lo8(39)
+ 335 019e 70E0      		ldi r23,hi8(39)
+ 336 01a0 80E0      		ldi r24,hlo8(39)
+ 337 01a2 90E0      		ldi r25,hhi8(39)
+ 338 01a4 0E94 0000 		call servo_left
+ 339               	.LM29:
+ 340 01a8 63E2      		ldi r22,lo8(35)
+ 341 01aa 70E0      		ldi r23,hi8(35)
+ 342 01ac 80E0      		ldi r24,hlo8(35)
+ 343 01ae 90E0      		ldi r25,hhi8(35)
+ 344 01b0 0E94 0000 		call servo_right
+ 345               	/* epilogue: frame size=0 */
+ 346 01b4 DF91      		pop r29
+ 347 01b6 CF91      		pop r28
+ 348 01b8 0895      		ret
+ 349               	/* epilogue end (size=3) */
+ 350               	/* function hold_position size 19 (12) */
+ 351               	.LFE10:
+ 353               	.global	delay_cycles
+ 355               	delay_cycles:
+ 356               	.LFB11:
+ 357               	.LM30:
+ 358               	/* prologue: frame size=4 */
+ 359 01ba CF93      		push r28
+ 360 01bc DF93      		push r29
+ 361 01be CDB7      		in r28,__SP_L__
+ 362 01c0 DEB7      		in r29,__SP_H__
+ 363 01c2 2497      		sbiw r28,4
+ 364 01c4 0FB6      		in __tmp_reg__,__SREG__
+ 365 01c6 F894      		cli
+ 366 01c8 DEBF      		out __SP_H__,r29
+ 367 01ca 0FBE      		out __SREG__,__tmp_reg__
+ 368 01cc CDBF      		out __SP_L__,r28
+ 369               	/* prologue end (size=10) */
+ 370 01ce 6983      		std Y+1,r22
+ 371 01d0 7A83      		std Y+2,r23
+ 372 01d2 8B83      		std Y+3,r24
+ 373 01d4 9C83      		std Y+4,r25
+ 374               	.LM31:
+ 375 01d6 00C0      		rjmp .L20
+ 376               	.L21:
+ 377               	.LM32:
+ 378 01d8 8981      		ldd r24,Y+1
+ 379 01da 9A81      		ldd r25,Y+2
+ 380 01dc AB81      		ldd r26,Y+3
+ 381 01de BC81      		ldd r27,Y+4
+ 382 01e0 0197      		sbiw r24,1
+ 383 01e2 A109      		sbc r26,__zero_reg__
+ 384 01e4 B109      		sbc r27,__zero_reg__
+ 385 01e6 8983      		std Y+1,r24
+ 386 01e8 9A83      		std Y+2,r25
+ 387 01ea AB83      		std Y+3,r26
+ 388 01ec BC83      		std Y+4,r27
+ 389               	.L20:
+ 390               	.LM33:
+ 391 01ee 8981      		ldd r24,Y+1
+ 392 01f0 9A81      		ldd r25,Y+2
+ 393 01f2 AB81      		ldd r26,Y+3
+ 394 01f4 BC81      		ldd r27,Y+4
+ 395 01f6 0097      		sbiw r24,0
+ 396 01f8 A105      		cpc r26,__zero_reg__
+ 397 01fa B105      		cpc r27,__zero_reg__
+ 398 01fc 01F4      		brne .L21
+ 399               	/* epilogue: frame size=4 */
+ 400 01fe 2496      		adiw r28,4
+ 401 0200 0FB6      		in __tmp_reg__,__SREG__
+ 402 0202 F894      		cli
+ 403 0204 DEBF      		out __SP_H__,r29
+ 404 0206 0FBE      		out __SREG__,__tmp_reg__
+ 405 0208 CDBF      		out __SP_L__,r28
+ 406 020a DF91      		pop r29
+ 407 020c CF91      		pop r28
+ 408 020e 0895      		ret
+ 409               	/* epilogue end (size=9) */
+ 410               	/* function delay_cycles size 43 (24) */
+ 411               	.LFE11:
+ 413               	.global	initA2D
+ 415               	initA2D:
+ 416               	.LFB12:
+ 417               	.LM34:
+ 418               	/* prologue: frame size=0 */
+ 419 0210 CF93      		push r28
+ 420 0212 DF93      		push r29
+ 421 0214 CDB7      		in r28,__SP_L__
+ 422 0216 DEB7      		in r29,__SP_H__
+ 423               	/* prologue end (size=4) */
+ 424               	.LM35:
+ 425 0218 0E94 0000 		call a2dInit
+ 426               	.LM36:
+ 427 021c 85E0      		ldi r24,lo8(5)
+ 428 021e 0E94 0000 		call a2dSetPrescaler
+ 429               	.LM37:
+ 430 0222 81E0      		ldi r24,lo8(1)
+ 431 0224 0E94 0000 		call a2dSetReference
+ 432               	/* epilogue: frame size=0 */
+ 433 0228 DF91      		pop r29
+ 434 022a CF91      		pop r28
+ 435 022c 0895      		ret
+ 436               	/* epilogue end (size=3) */
+ 437               	/* function initA2D size 15 (8) */
+ 438               	.LFE12:
+ 440               	.global	read_input8
+ 442               	read_input8:
+ 443               	.LFB13:
+ 444               	.LM38:
+ 445               	/* prologue: frame size=4 */
+ 446 022e CF93      		push r28
+ 447 0230 DF93      		push r29
+ 448 0232 CDB7      		in r28,__SP_L__
+ 449 0234 DEB7      		in r29,__SP_H__
+ 450 0236 2497      		sbiw r28,4
+ 451 0238 0FB6      		in __tmp_reg__,__SREG__
+ 452 023a F894      		cli
+ 453 023c DEBF      		out __SP_H__,r29
+ 454 023e 0FBE      		out __SREG__,__tmp_reg__
+ 455 0240 CDBF      		out __SP_L__,r28
+ 456               	/* prologue end (size=10) */
+ 457 0242 9C83      		std Y+4,r25
+ 458 0244 8B83      		std Y+3,r24
+ 459               	.LM39:
+ 460 0246 1A82      		std Y+2,__zero_reg__
+ 461 0248 1982      		std Y+1,__zero_reg__
+ 462               	.LM40:
+ 463 024a 8B81      		ldd r24,Y+3
+ 464 024c 0E94 0000 		call a2dConvert8bit
+ 465 0250 9927      		clr r25
+ 466 0252 9A83      		std Y+2,r25
+ 467 0254 8983      		std Y+1,r24
+ 468               	.LM41:
+ 469 0256 8981      		ldd r24,Y+1
+ 470 0258 9A81      		ldd r25,Y+2
+ 471               	/* epilogue: frame size=4 */
+ 472 025a 2496      		adiw r28,4
+ 473 025c 0FB6      		in __tmp_reg__,__SREG__
+ 474 025e F894      		cli
+ 475 0260 DEBF      		out __SP_H__,r29
+ 476 0262 0FBE      		out __SREG__,__tmp_reg__
+ 477 0264 CDBF      		out __SP_L__,r28
+ 478 0266 DF91      		pop r29
+ 479 0268 CF91      		pop r28
+ 480 026a 0895      		ret
+ 481               	/* epilogue end (size=9) */
+ 482               	/* function read_input8 size 31 (12) */
+ 483               	.LFE13:
+ 486               	blink_n_times:
+ 487               	.LFB14:
+ 488               	.LM42:
+ 489               	/* prologue: frame size=2 */
+ 490 026c CF93      		push r28
+ 491 026e DF93      		push r29
+ 492 0270 CDB7      		in r28,__SP_L__
+ 493 0272 DEB7      		in r29,__SP_H__
+ 494 0274 2297      		sbiw r28,2
+ 495 0276 0FB6      		in __tmp_reg__,__SREG__
+ 496 0278 F894      		cli
+ 497 027a DEBF      		out __SP_H__,r29
+ 498 027c 0FBE      		out __SREG__,__tmp_reg__
+ 499 027e CDBF      		out __SP_L__,r28
+ 500               	/* prologue end (size=10) */
+ 501 0280 8983      		std Y+1,r24
+ 502               	.LM43:
+ 503 0282 00C0      		rjmp .L29
+ 504               	.L30:
+ 505               	.LM44:
+ 506 0284 64EF      		ldi r22,lo8(500)
+ 507 0286 71E0      		ldi r23,hi8(500)
+ 508 0288 80E0      		ldi r24,hlo8(500)
+ 509 028a 90E0      		ldi r25,hhi8(500)
+ 510 028c 0E94 0000 		call delay_cycles
+ 511               	.LM45:
+ 512 0290 64EF      		ldi r22,lo8(500)
+ 513 0292 71E0      		ldi r23,hi8(500)
+ 514 0294 80E0      		ldi r24,hlo8(500)
+ 515 0296 90E0      		ldi r25,hhi8(500)
+ 516 0298 0E94 0000 		call delay_cycles
+ 517               	.L29:
+ 518               	.LM46:
+ 519 029c 1A82      		std Y+2,__zero_reg__
+ 520 029e 8981      		ldd r24,Y+1
+ 521 02a0 1816      		cp __zero_reg__,r24
+ 522 02a2 04F4      		brge .L31
+ 523 02a4 81E0      		ldi r24,lo8(1)
+ 524 02a6 8A83      		std Y+2,r24
+ 525               	.L31:
+ 526 02a8 8981      		ldd r24,Y+1
+ 527 02aa 8150      		subi r24,lo8(-(-1))
+ 528 02ac 8983      		std Y+1,r24
+ 529 02ae 8A81      		ldd r24,Y+2
+ 530 02b0 8823      		tst r24
+ 531 02b2 01F4      		brne .L30
+ 532               	/* epilogue: frame size=2 */
+ 533 02b4 2296      		adiw r28,2
+ 534 02b6 0FB6      		in __tmp_reg__,__SREG__
+ 535 02b8 F894      		cli
+ 536 02ba DEBF      		out __SP_H__,r29
+ 537 02bc 0FBE      		out __SREG__,__tmp_reg__
+ 538 02be CDBF      		out __SP_L__,r28
+ 539 02c0 DF91      		pop r29
+ 540 02c2 CF91      		pop r28
+ 541 02c4 0895      		ret
+ 542               	/* epilogue end (size=9) */
+ 543               	/* function blink_n_times size 45 (26) */
+ 544               	.LFE14:
+ 546               	.global	main
+ 548               	main:
+ 549               	.LFB15:
+ 550               	.LM47:
+ 551               	/* prologue: frame size=0 */
+ 552 02c6 CF93      		push r28
+ 553 02c8 DF93      		push r29
+ 554 02ca CDB7      		in r28,__SP_L__
+ 555 02cc DEB7      		in r29,__SP_H__
+ 556               	/* prologue end (size=4) */
+ 557               	.LM48:
+ 558 02ce A7E3      		ldi r26,lo8(55)
+ 559 02d0 B0E0      		ldi r27,hi8(55)
+ 560 02d2 E7E3      		ldi r30,lo8(55)
+ 561 02d4 F0E0      		ldi r31,hi8(55)
+ 562 02d6 8081      		ld r24,Z
+ 563 02d8 8064      		ori r24,lo8(64)
+ 564 02da 8C93      		st X,r24
+ 565               	.LM49:
+ 566 02dc A7E3      		ldi r26,lo8(55)
+ 567 02de B0E0      		ldi r27,hi8(55)
+ 568 02e0 E7E3      		ldi r30,lo8(55)
+ 569 02e2 F0E0      		ldi r31,hi8(55)
+ 570 02e4 8081      		ld r24,Z
+ 571 02e6 8F7D      		andi r24,lo8(-33)
+ 572 02e8 8C93      		st X,r24
+ 573               	.LM50:
+ 574 02ea A8E3      		ldi r26,lo8(56)
+ 575 02ec B0E0      		ldi r27,hi8(56)
+ 576 02ee E8E3      		ldi r30,lo8(56)
+ 577 02f0 F0E0      		ldi r31,hi8(56)
+ 578 02f2 8081      		ld r24,Z
+ 579 02f4 8062      		ori r24,lo8(32)
+ 580 02f6 8C93      		st X,r24
+ 581 02f8 00C0      		rjmp .L40
+ 582               	.L35:
+ 583               	.L40:
+ 584               	.LM51:
+ 585 02fa E6E3      		ldi r30,lo8(54)
+ 586 02fc F0E0      		ldi r31,hi8(54)
+ 587 02fe 8081      		ld r24,Z
+ 588 0300 9927      		clr r25
+ 589 0302 8072      		andi r24,lo8(32)
+ 590 0304 9070      		andi r25,hi8(32)
+ 591 0306 0097      		sbiw r24,0
+ 592 0308 01F4      		brne .L36
+ 593               	.LM52:
+ 594 030a A8E3      		ldi r26,lo8(56)
+ 595 030c B0E0      		ldi r27,hi8(56)
+ 596 030e E8E3      		ldi r30,lo8(56)
+ 597 0310 F0E0      		ldi r31,hi8(56)
+ 598 0312 8081      		ld r24,Z
+ 599 0314 8064      		ori r24,lo8(64)
+ 600 0316 8C93      		st X,r24
+ 601 0318 00C0      		rjmp .L35
+ 602               	.L36:
+ 603               	.LM53:
+ 604 031a A8E3      		ldi r26,lo8(56)
+ 605 031c B0E0      		ldi r27,hi8(56)
+ 606 031e E8E3      		ldi r30,lo8(56)
+ 607 0320 F0E0      		ldi r31,hi8(56)
+ 608 0322 8081      		ld r24,Z
+ 609 0324 8F7B      		andi r24,lo8(-65)
+ 610 0326 8C93      		st X,r24
+ 611               	.LM54:
+ 612 0328 00C0      		rjmp .L35
+ 613               	/* epilogue: frame size=0 */
+ 614               	/* epilogue: noreturn */
+ 615               	/* epilogue end (size=0) */
+ 616               	/* function main size 50 (46) */
+ 617               	.LFE15:
+ 747               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 ocbot1.c
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:20     .text:00000000 turn_on_led
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:47     .text:0000001c turn_off_led
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:74     .text:00000038 servo_left
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:355    .text:000001ba delay_cycles
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:137    .text:0000009a servo_right
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:200    .text:000000fc robot_turn_left
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:231    .text:00000122 robot_turn_right
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:262    .text:00000148 robot_go_straight
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:293    .text:0000016e robot_go_reverse
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:324    .text:00000194 hold_position
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:415    .text:00000210 initA2D
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:442    .text:0000022e read_input8
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:486    .text:0000026c blink_n_times
+C:\DOCUME~1\Hova\LOCALS~1\Temp/ccXbkGrE.s:548    .text:000002c6 main
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+a2dInit
+a2dSetPrescaler
+a2dSetReference
+a2dConvert8bit
